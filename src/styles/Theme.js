@@ -1,9 +1,10 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
+
 const mainColor = "#0B020B";
 const secondaryColor =  "#370D32";
 
-const white = "#FFFCF7";
+const white = "#FFF";
 const pinkColor = "#9C0D38";
 const creamColor = "#F2F6D0";
 const orangeRed = "#EE2E31";
@@ -17,7 +18,7 @@ export const theme = createMuiTheme({
             white: `${secondaryColor}`
         },
         primary: {
-            main: `${mainColor}`,
+            main: `${white}`,
             light: `${creamColor}`,
             dark: `${darkViolet}`
         },
@@ -27,13 +28,25 @@ export const theme = createMuiTheme({
             light: `${orangeRed}`,
         }
     },
+    breakpoints: {
+        values: {
+            xs: 0,
+            s: 350,
+            sm: 600,
+            md: 960,
+            lg: 1280,
+            xl: 1920,
+        }
+    },
     typography: {
         fontSize: "1.6rem",
         tab: {
-            fontFamily: 'Raleway',
             fontWeigth: 700,
-            fontSize: "1rem",
-            textTransform: "none"
+            textTransform: "uppercase",
+            
         }
-    }
+    },
+    spacing: 16
 });
+
+
