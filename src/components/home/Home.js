@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Adoption } from '../sections/adoption/Adoption'
 //Material
 import { ContainerDiv } from '../../styles/components/home/home'
 import { Header } from '../header/Header'
@@ -13,7 +13,7 @@ export const Home = () => {
             <Header />
           </header>
           <main>
-
+          <Adoption />
           </main>
           <footer>
 

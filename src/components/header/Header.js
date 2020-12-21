@@ -28,11 +28,11 @@ const useStyles = makeStyles(theme => ({
     imgSection: {
         width: "35rem",
         height: "35rem",
+        animation: "$fadeIn 1s ease-in-out",
         [theme.breakpoints.down('md')] : {
             width: "20rem",
             height: "20rem",
             margin: "2rem auto",
-
             padding: theme.spacing(1)
          },
         [theme.breakpoints.only('xs')] : {
@@ -50,6 +50,7 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.primary.main,
         fontSize: "4rem",
         padding: theme.spacing(1),
+        animation: "$fadeOut .8s ease-in-out",
         [theme.breakpoints.down('xs')] : {
             fontSize: "2rem",
             padding: theme.spacing(0),
@@ -60,6 +61,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: "2.5rem",
         padding: theme.spacing(1),
         color: theme.palette.primary.light,
+        animation: "$fadeIn .5s ease-in-out",
         [theme.breakpoints.down('xs')] : {
             fontSize: "1.2rem",
             
@@ -72,7 +74,27 @@ const useStyles = makeStyles(theme => ({
             fontSize: "2rem",
             textAlign: "center"
          },
-    }
+    },
+    "@keyframes fadeIn": {
+        "0%": {
+          opacity: 0,
+          transform: "translateX(10rem)"
+        },
+        "100%": {
+          opacity: 1,
+          transform: "translateY(0)"
+        },
+    },
+    "@keyframes fadeOut": {
+        "0%": {
+          opacity: 0,
+          transform: "translateX(-10rem)"
+        },
+        "100%": {
+          opacity: 1,
+          transform: "translateY(0)"
+        },
+    },
 }))
 export const Header = () => {
     const classes = useStyles()

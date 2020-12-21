@@ -5,7 +5,8 @@ import adoptr from '../../images/adoptr.png'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {  Link } from 'react-router-dom'
 import { Tabs, Tab, Button, useMediaQuery } from '@material-ui/core'
-import { AiOutlineUserAdd } from 'react-icons/ai'
+import { AiOutlineUserAdd } from 'react-icons/ai';
+import { SideBar } from './Sidebar'
 
 const useStyles = makeStyles(theme => ({
     toolbarMargin: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles(theme => ({
         position: "block",
         width: "12rem",
         height: "12rem",
+        animation: "$fadeIn 1s ease-in-out",
         [theme.breakpoints.down('md')]: {
             height: "9rem",
             width: "9rem",
@@ -70,7 +72,10 @@ const useStyles = makeStyles(theme => ({
          },
          [theme.breakpoints.down('md')] : {
             margin: 0,
-            padding: ".3rem"
+            padding: ".3rem",
+            "&:hover": {
+                transform: "scale(1.10)"
+                },
          }
     },
     iconUser: {
@@ -81,13 +86,34 @@ const useStyles = makeStyles(theme => ({
         "&:hover": {
         transform: "scale(1.20)"
         }
+    },
+    "@keyframes fadeIn": {
+        "0%": {
+          opacity: 0,
+          transform: "translateX(10rem)"
+        },
+        "100%": {
+          opacity: 1,
+          transform: "translateY(0)"
+        },
+    },
+    sideBarActive: {
+        color: "green"
+       
+    },
+    sideBarInactive: {
+        color: "black"
     }
 }));
 
 export const NavBar = () => {
     const classes = useStyles()
     const theme = useTheme()
+  
+
     const matches = useMediaQuery(theme.breakpoints.down("xs"))
+
+    
     return (
         <>
         <AppBar position="fixed" className={classes.appBarStyle} elevation={0}>
@@ -97,28 +123,40 @@ export const NavBar = () => {
             </Button>
                <Tabs className={classes.tabsContainer}
                indicatorColor="secondary">
-                        <Tab className={classes.tab} label="Inicio" to="/" component={Link}/>
-                        <Tab className={classes.tab} label="Quienes somos" to="/" component={Link}/>
+                   {matches ?
+                   null
+                   : 
+                   <>
+                     <Tab className={classes.tab} label="Inicio" to="/" component={Link}/>
+                     <Tab className={classes.tab} label="Quienes somos" to="/" component={Link}/>
+                     </>
+                   }
+              
                </Tabs>
                <Tabs className={classes.tabContainer}
                indicatorColor="secondary">
                    {matches ? 
                    <>
+                    
                     <AiOutlineUserAdd className={classes.iconUser}/>
-                   
+
                     </>
                    :
                    <>
                    <Tab className={classes.tab} label="Iniciar sesion" to="/login" component={Link}/>
                    <Tab className={classes.tab} label="Crear cuenta" to="/register" component={Link}/>
+                  
                    </>
                    }
-                       
+                  
+
+                  
                </Tabs>
             </Toolbar>
         </AppBar>
         
         <div className={classes.toolbarMargin} />
+        <SideBar />
         </>
     )
 }

@@ -31,7 +31,9 @@ export const theme = createMuiTheme({
     breakpoints: {
         values: {
             xs: 0,
-            s: 350,
+            supersmall: 110,
+            iphone5s: 330,
+            small: 350,
             sm: 600,
             md: 960,
             lg: 1280,
@@ -43,7 +45,7 @@ export const theme = createMuiTheme({
         tab: {
             fontWeigth: 700,
             textTransform: "uppercase",
-            
+            fontFamily: 'Poppins'
         }
     },
     spacing: 16

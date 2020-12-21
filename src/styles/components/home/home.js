@@ -9,16 +9,16 @@ export const ContainerHome = withStyles(theme => ({
       minHeight: '100vh',
       [theme.breakpoints.down('xs')] : {
         maxWidth : "60rem",
-        
+        maxHeight: '70vw',
      },
     [theme.breakpoints.down('md')]: {
         maxWidth : "96rem",
-        minHeight: '120vh',
+        maxHeight: '70vw',
      },
      
      [theme.breakpoints.up('lg')]: {
         maxWidth : "128rem",
-        
+        maxHeight: '70vw',
      },
      [theme.breakpoints.up('xl')]: {
         maxWidth : "128rem"

@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { Home } from '../components/home/Home';
 import { Login } from '../components/login/Login';
 import { Register } from '../components/register/Register';
-import { Adoption } from '../components/adoption/Adoption';
+import { Adoption } from '../components/sections/adoption/Adoption';
 //Material
 
 import { ContainerHome } from '../styles/components/home/home'
