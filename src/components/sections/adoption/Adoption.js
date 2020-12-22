@@ -7,9 +7,11 @@ import adoptar3 from '../../../images/adoptar3.jpg'
 const useStyles = makeStyles(theme => ({
     container: {
         minHeight: "60vh",
+        height: "65vh",
         display: "grid",
         gridTemplateColumns: "repeat(2, 1fr)",
         margin: "0 auto",
+        color: "yellow",
         [theme.breakpoints.between('xs', 'sm')]: {
             display: "flex",
             justifyContent: "center",
@@ -52,17 +54,20 @@ const useStyles = makeStyles(theme => ({
         zIndex: 5,
         transition: "all .3s ease-out",
         padding: theme.spacing(.5),
-        [theme.breakpoints.only('md')]: {
-            width: "14rem",
-            height: "14rem",
+        marginBottom: "3rem",
+        [theme.breakpoints.between('small', 'sm')]: {
+            width: "8rem",
+            height: "8rem",
             top: 0,
-            left: "2rem"
-            
+            left: "3rem"
          },
-        [theme.breakpoints.down('xs')]: {
-            width: "5rem",
-            height: "5rem",
-            left: "2rem"
+        [theme.breakpoints.down(530)]: {
+            width: "6rem",
+            height: "6rem",
+            top: 0,
+            left: "-1rem",
+            margin: theme.spacing(1),
+            padding: theme.spacing(.1)
             
          },
         "&:hover":{
@@ -81,17 +86,19 @@ const useStyles = makeStyles(theme => ({
         transition: "all .3s ease-out",
         zIndex: 5,
         padding: theme.spacing(.5),
-        [theme.breakpoints.only('md')]: {
-            width: "14rem",
-            height: "14rem",
-       
-         },
-        [theme.breakpoints.down('xs')]: {
-            width: "5rem",
-            height: "5rem",
+        [theme.breakpoints.between('small', 'sm')]: {
+            width: "8rem",
+            height: "8rem",
             top: 0,
-            left: "12rem"
-            
+            left: "20rem"
+         },
+        [theme.breakpoints.down(530)]: {
+            width: "6rem",
+            height: "6rem",
+            top: 0,
+            left: "6rem",
+            margin: theme.spacing(1),
+            padding: theme.spacing(.1)
          },
         "&:hover":{
             transform: "scale(1.10)",
@@ -109,16 +116,19 @@ const useStyles = makeStyles(theme => ({
         zIndex: 5,
         transition: "all .3s ease-out",
         padding: theme.spacing(.5),
-        [theme.breakpoints.only('md')]: {
-            width: "14rem",
-            height: "14rem",
-         
-         },
-        [theme.breakpoints.down('xs')]: {
-            width: "5rem",
-            height: "5rem",
+        [theme.breakpoints.between('small', 'sm')]: {
+            width: "8rem",
+            height: "8rem",
             top: 0,
-            left: "7rem"
+            left: "11rem"
+         },
+        [theme.breakpoints.down(530)]: {
+            width: "6rem",
+            height: "6rem",
+            top: 0,
+            left: "13rem",
+            margin: theme.spacing(1),
+            padding: theme.spacing(.1)
             
          },
         "&:hover":{
@@ -145,7 +155,7 @@ const useStyles = makeStyles(theme => ({
     },
     h2typ: {
         ...theme.typography.tab,
-        color: theme.palette.secondary.main,
+        color: theme.palette.primary.main,
         padding: theme.spacing(.5),
         [theme.breakpoints.down('xs')]: {
             fontSize: ".7rem",

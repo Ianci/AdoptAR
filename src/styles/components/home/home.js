@@ -9,7 +9,7 @@ export const ContainerHome = withStyles(theme => ({
       minHeight: '100vh',
       [theme.breakpoints.down('xs')] : {
         maxWidth : "60rem",
-        maxHeight: '70vw',
+        maxHeight: '90vw',
      },
     [theme.breakpoints.down('md')]: {
         maxWidth : "96rem",
@@ -30,28 +30,3 @@ export const ContainerHome = withStyles(theme => ({
   }))(Container);
 
 
-export const ContainerDiv = withStyles(theme => ({
-    root: {
-        maxHeight: '100vh',
-        padding: theme.spacing(3),
-        [theme.breakpoints.down('xs')] : {
-            maxWidth : "60rem",
-            color: "white",
-            padding: 0
-         },
-        [theme.breakpoints.up('md')]: {
-            maxWidth : "96rem",
-            
-         },
-         
-         [theme.breakpoints.up('lg')]: {
-            maxWidth : "128rem",
-            padding: theme.spacing(3),
-            
-         },
-         [theme.breakpoints.up('xl')]: {
-            maxWidth : "128rem",
-            padding: theme.spacing(3),
-         },
-    }
- }))(Container);

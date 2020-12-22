@@ -1,23 +1,27 @@
 import React from 'react'
 import { Adoption } from '../sections/adoption/Adoption'
+import { Carrousel } from '../sections/carrousel/Carrousel'
+import { dataCarrousel } from '../sections/carrousel/Data'
 //Material
-import { ContainerDiv } from '../../styles/components/home/home'
+
 import { Header } from '../header/Header'
 
 
 export const Home = () => {
     
     return (
-        <ContainerDiv>
+          <>
           <header>
             <Header />
           </header>
-          <main>
+          <main  style={{background: "linear-gradient(45deg, #FE6B8B 40%, #FF8E53 90%)"}}>
+         
           <Adoption />
+          <Carrousel slides={dataCarrousel}/>
           </main>
           <footer>
 
           </footer>
-        </ContainerDiv>
+       </>
     )
 }

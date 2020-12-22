@@ -14,14 +14,17 @@ const useStyles = makeStyles(theme => ({
         color: "white",
         fontSize: "1.6rem",
         right: "1rem",
-      
+        [theme.breakpoints.up(599)]: {
+            left: "25.6rem",
+            paddingBottom: theme.spacing(.2)
+         },
         [theme.breakpoints.between('small','sm')]: {
-            left: "16.6rem",
+            left: "19.6rem",
             paddingBottom: theme.spacing(.2)
          },
          
-         [theme.breakpoints.between('small','supersmall')]: {
-            left: "11.6rem",
+         [theme.breakpoints.down(362)]: {
+            left: "15.6rem",
             paddingBottom: theme.spacing(.2)
          },
     },
