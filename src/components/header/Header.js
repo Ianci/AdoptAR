@@ -47,8 +47,10 @@ const useStyles = makeStyles(theme => ({
     },
     h1Title: {
         letterSpacing: 1.5555,
-        color: theme.palette.primary.main,
+        color: "yellow",
         fontSize: "4rem",
+        textAlign: "center",
+        ...theme.typography.tab,
         padding: theme.spacing(1),
         animation: "$fadeOut .8s ease-in-out",
         [theme.breakpoints.down('xs')] : {
@@ -59,6 +61,7 @@ const useStyles = makeStyles(theme => ({
     },
     h2Title: {
         fontSize: "2.5rem",
+        textAlign: "center",    
         padding: theme.spacing(1),
         color: theme.palette.primary.light,
         animation: "$fadeIn .5s ease-in-out",
@@ -95,6 +98,9 @@ const useStyles = makeStyles(theme => ({
           transform: "translateY(0)"
         },
     },
+    titleContainer: {
+        alignSelf: "center",
+    }
 }))
 export const Header = () => {
     const classes = useStyles()
@@ -103,7 +109,7 @@ export const Header = () => {
         <NavBar />
         <section className={classes.sectionOne}>
         <div className={classes.sectionContainer}>
-        <div className="">
+        <div className={classes.titleContainer}>
 
         <Typography variant="h1" component="h1" className={classes.h1Title}>Somos Adopt<span className={classes.spanAR}>AR</span></Typography>
         <Typography variant="h2" component="h4" className={classes.h2Title}>Tu portal para adoptar o publicar un animal en adopción</Typography>

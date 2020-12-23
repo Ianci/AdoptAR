@@ -2,9 +2,11 @@ import React from 'react'
 import { Adoption } from '../sections/adoption/Adoption'
 import { Carrousel } from '../sections/carrousel/Carrousel'
 import { dataCarrousel } from '../sections/carrousel/Data'
+import { Footer } from '../../components/footer/Footer'
 //Material
 
 import { Header } from '../header/Header'
+import { Experiences } from '../sections/experiences/Experiences'
 
 
 export const Home = () => {
@@ -14,13 +16,13 @@ export const Home = () => {
           <header>
             <Header />
           </header>
-          <main  style={{background: "linear-gradient(45deg, #FE6B8B 40%, #FF8E53 90%)"}}>
-         
+          <main>
           <Adoption />
           <Carrousel slides={dataCarrousel}/>
+          <Experiences />
           </main>
           <footer>
-
+          <Footer />
           </footer>
        </>
     )
