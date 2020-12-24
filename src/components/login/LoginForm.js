@@ -194,7 +194,10 @@ export const LoginForm = () => {
     const classes = useStyles()
     const history = useHistory()
 
-
+    //BackBtn
+    const back = () => {
+        history.push('/')
+    }
     return (
         <Formik initialValues={{email: "", password: ""}}
         validationSchema = {Yup.object({
@@ -221,9 +224,9 @@ export const LoginForm = () => {
                                  <ErrorMessage name="email" component="small" className={classes.errorMessage} />
                              
  
-                                 <Field as={TextField} type="password" classes={{root: classes.field}} name="password" label="Introduce tu contraseña" variant="outlined" color="secondary" autoComplete="off"/>
+                                 <Field as={TextField} type="password" classes={{root: classes.field}} name="password" label="Introduce tu contraseña" variant="outlined" color="secondary" autoComplete="off" size="small"/>
                                  <ErrorMessage name="password" component="small" className={classes.errorMessage} />
-                                 <StyledBtn>Entrar</StyledBtn>
+                                 <StyledBtn disabled={!(isValid && dirty)}>Entrar</StyledBtn>
                                  <div className={classes.authContainer}>
                                         <Typography className={classes.register_h1}>Login with:</Typography>
 
@@ -239,7 +242,7 @@ export const LoginForm = () => {
                                     </div>
                                     <div className={classes.linkContainer}>
                                     <Link to="/register" className={classes.link_newAccount}> Create new account</Link>
-                                    <BackButton>Volver</BackButton>
+                                    <BackButton onClick={() => history.push('/')}>Volver</BackButton>
                                     </div>
                             </div>
                      </Form>

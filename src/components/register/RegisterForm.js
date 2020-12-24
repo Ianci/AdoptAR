@@ -231,9 +231,9 @@ export const RegisterForm = () => {
                                 <Field as={TextField} type="password"  classes={{root: classes.field}} name="confirm" label="Repita tu contraseña" variant="outlined" color="secondary" autoComplete="off"/>
                                 <ErrorMessage name="confirm" component="small" className={classes.errorMessage} />
 
-                                <StyledBtn>Crear cuenta</StyledBtn>
+                                <StyledBtn disabled={!(isValid && dirty)} onClick={() => console.log('asd')}>Crear cuenta</StyledBtn>
                         <Typography variant="h4" className={classes.connectLink}>Ya tenés cuenta? Conectate <Link to="/login" className={classes.loginLink}>acá</Link></Typography>
-                        <BackButton>Volver</BackButton>
+                        <BackButton onClick={() => history.push('/')}>Volver</BackButton>
                         </div>
                     </Form>
                </div>

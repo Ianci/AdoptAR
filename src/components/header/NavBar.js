@@ -3,7 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import adoptr from '../../images/adoptr.png'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import {  Link } from 'react-router-dom'
+import {  Link, useHistory } from 'react-router-dom'
 import { Tabs, Tab, Button, useMediaQuery } from '@material-ui/core'
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { SideBar } from './Sidebar'
@@ -109,7 +109,7 @@ const useStyles = makeStyles(theme => ({
 export const NavBar = () => {
     const classes = useStyles()
     const theme = useTheme()
-  
+    const history = useHistory()
 
     const matches = useMediaQuery(theme.breakpoints.down("xs"))
 
@@ -138,7 +138,7 @@ export const NavBar = () => {
                    {matches ? 
                    <>
                     
-                    <AiOutlineUserAdd className={classes.iconUser}/>
+                    <AiOutlineUserAdd className={classes.iconUser} onClick={ () => history.push('/login')}/>
 
                     </>
                    :
