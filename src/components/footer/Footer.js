@@ -4,6 +4,10 @@ import { Typography } from '@material-ui/core';
 import { AiFillFacebook } from 'react-icons/ai';
 import { IoLogoTwitter } from 'react-icons/io';
 import { GrInstagram } from 'react-icons/gr';
+import adoptr from '../../images/adoptr.png'
+
+
+
 const useStyles = makeStyles(theme=> ({
     footerContainer: {
         height: "40vh",
@@ -26,7 +30,7 @@ const useStyles = makeStyles(theme=> ({
     },
     footer_grid: {
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
+        gridTemplateColumns: "1fr 1fr 1fr",
         gridTemplateRows: "1fr",
         padding: theme.spacing(2),
         margin: theme.spacing(2),
@@ -50,6 +54,20 @@ const useStyles = makeStyles(theme=> ({
         "&:hover":{
             transform: "translateY(-5px)"
         }
+    },
+    adoptrLogo: {
+        position: "block",
+        width: "15rem",
+        height: "15rem",
+        animation: "$fadeIn 1s ease-in-out",
+        [theme.breakpoints.down('md')]: {
+            height: "9rem",
+            width: "9rem",
+         },
+         [theme.breakpoints.down('xs')] : {
+            height: "5rem",
+            width: "5rem"
+         }
     }
 }));
 export const Footer = () => {
@@ -58,6 +76,9 @@ export const Footer = () => {
             <> 
         <div className={classes.footerContainer}>
         <div className={classes.footer_grid}>
+            <div className="">
+                <img src={adoptr} alt="adopt" className={classes.adoptrLogo}/>
+            </div>
             <div className="">
 
             <Typography variant="h1" className={classes.footer_h1}>Contacto</Typography>
