@@ -6,6 +6,10 @@ import * as Yup from 'yup';
 import { useHistory, Link } from 'react-router-dom'
 import imgForm from '../../images/adoptar3.jpg'
 import { StyledBtn } from '../../styles/Buttons'
+import {  purple, green } from '@material-ui/core/colors';
+import { BackButton } from '../../styles/Buttons'
+
+
 const useStyles = makeStyles((theme)=>({
     sectionRegister: {
         position: "relative",
@@ -16,13 +20,24 @@ const useStyles = makeStyles((theme)=>({
       
         width: "1200px",
         maxWidth: "1200px",
-        height: "40rem",
+        height: "42rem",
         boxShadow: "0 1.5rem 4rem rgba(0, 0, 0, 0.4)",
-      
         margin: "0 auto",
+        [theme.breakpoints.down(600)] : {
+            width: "320px",
+            margin: 0,
+            height: "37rem", 
+         },
+         [theme.breakpoints.only('md')]: {
+            width: "600px",
+            height: "37rem", 
+          },
+          [theme.breakpoints.only('sm')]: {
+            width: "500px",
+            height: "37rem", 
+          },
     },
     registerContainer: {
-        
         backgroundImage: `linear-gradient(105deg, 
             rgba(255, 255, 255, 0.9 ) 0%, 
             rgba(255, 255, 255, 0.9) 50%, 
@@ -31,6 +46,16 @@ const useStyles = makeStyles((theme)=>({
             backgroundSize: "cover",
             width: "100%",
             height: "100%",
+            [theme.breakpoints.down(600)] : {
+                backgroundImage: `linear-gradient(105deg, 
+                    rgba(255, 255, 255, 0.9 ) 0%, 
+                    rgba(255, 255, 255, 0.9) 50%, 
+                    transparent 50%)
+                    ,url(${imgForm})`,
+                    backgroundSize: "cover",
+                    objectFit: "cover",
+                    height: "39rem"
+             },
     },
     authContainer: {
         display: "flex",
@@ -45,6 +70,18 @@ const useStyles = makeStyles((theme)=>({
         flexDirection: "column",
         width: "500px",
         padding: theme.spacing(2),
+        [theme.breakpoints.down(600)] : {
+            width: "320px",
+            margin: 0,
+            height: "37rem",
+            
+         },
+         [theme.breakpoints.up('md')]: {
+            width: "380px",
+          },
+          [theme.breakpoints.up('lg')]: {
+            width: "500px",
+          },
     },
     loginWith: {
 
@@ -58,7 +95,7 @@ const useStyles = makeStyles((theme)=>({
         borderRadius: "2px",
         boxShadow: "0 3px 4px 0 rgba(0, 0, 0, 0.25)",
         transition: "box-shadow .3s ease"
-
+        
     },
     google_wrapper: {
         position: "absolute",
@@ -85,6 +122,11 @@ const useStyles = makeStyles((theme)=>({
         textAlign: "center",
         marginLeft: "10rem",
         float: "left",
+        [theme.breakpoints.down(600)] : {
+          marginLeft: "4rem"
+            
+         },
+      
         
     },
     btnFacebook: {
@@ -107,17 +149,43 @@ const useStyles = makeStyles((theme)=>({
         textAlign: "center",
         ...theme.typography.tabs,
         marginBottom: theme.spacing(1),
-        fontFamily: "Poppins"
+        fontFamily: "Poppins",
+        color: "#ED6A5A",
+        textShadow: "0px 2px 10px rgba(0,0,0,0.3)",
     },
     errorMessage: {
         color: "red",
-        padding: theme.spacing(.5)
+
     },
     btnFace: {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         fontSize: "16px"
+    },
+    field: {
+        margin: theme.spacing(.5),
+       height: "30px",
+        '& fieldset': {
+            borderColor: purple[700],
+          },
+          '&:hover fieldset': {
+            borderColor: green[500],
+          },
+         
+    },
+    linkContainer: {
+        margin: "0 auto",
+        padding: theme.spacing(1),
+        display: "flex",
+        flexDirection: "column"
+    },
+    link_newAccount: {
+        textDecoration: "none",
+        textAlign: "center",
+        ...theme.typography.tab,
+        cursor: "pointer",
+       
     }
 }));
 
@@ -149,11 +217,11 @@ export const LoginForm = () => {
                          <div className={classes.registerBody}>
                          <Typography variant="h2" className={classes.register_h1}>Ingrese a su cuenta</Typography>
 
-                                 <Field as={TextField}  type="email"  className={classes.InputForm} name="email" label="Introduce tu email" variant="outlined" color="secondary"/>
+                                 <Field as={TextField}  type="email"  classes={{root: classes.field}} name="email" label="Introduce tu email" variant="outlined" color="secondary" autoComplete="off" size="small"/>
                                  <ErrorMessage name="email" component="small" className={classes.errorMessage} />
                              
  
-                                 <Field as={TextField} type="password" className={classes.InputForm} name="password" label="Introduce tu contraseña" variant="outlined" color="secondary"/>
+                                 <Field as={TextField} type="password" classes={{root: classes.field}} name="password" label="Introduce tu contraseña" variant="outlined" color="secondary" autoComplete="off"/>
                                  <ErrorMessage name="password" component="small" className={classes.errorMessage} />
                                  <StyledBtn>Entrar</StyledBtn>
                                  <div className={classes.authContainer}>
@@ -169,8 +237,9 @@ export const LoginForm = () => {
                                     <div className={classes.btnFace}>
                                         <button type="button" className={classes.btnFacebook}>Continue with Facebook</button>
                                     </div>
-                                    <div className="auth__createAcount_link">
-                                    <Link to="/auth/register" className="link"> Create new account</Link>
+                                    <div className={classes.linkContainer}>
+                                    <Link to="/register" className={classes.link_newAccount}> Create new account</Link>
+                                    <BackButton>Volver</BackButton>
                                     </div>
                             </div>
                      </Form>
