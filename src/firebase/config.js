@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import 'firebase/storage'; 
 
 const firebaseConfig = {
     apiKey: "AIzaSyD9slddeLmvtzUFaD_mFq2ZfQ2vkXWcAuw",
@@ -14,11 +15,21 @@ const firebaseConfig = {
 
   firebase.initializeApp(firebaseConfig);
 
+  
   const db = firebase.firestore();
   const storage = firebase.storage();
   
   const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
   const faceAuthProvider = new firebase.auth.FacebookAuthProvider();
   
+  const createUser = async  ( name, email, password ) => {
+    const newUser = await firebase.auth().createUserWithEmailAndPassword(email, password)
+    console.log(newUser)
+    return await newUser.user.updateProfile({ displayName: name})
+  }
+  const loginUser = async (email, password ) => {
+    return await firebase.auth().signInWithEmailAndPassword(email, password)
+  }
   
-  export { db, storage, googleAuthProvider, firebase, faceAuthProvider}
+
+  export { db, storage, googleAuthProvider, firebase, faceAuthProvider, createUser, loginUser}

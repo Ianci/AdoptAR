@@ -21,6 +21,6 @@
     padding: 1rem;
     position: absolute;
     top: 0;
-    z-index: 300;
+    z-index: 3990;
     border-right: 1px solid orangered;
 }

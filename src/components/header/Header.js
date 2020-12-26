@@ -61,7 +61,8 @@ const useStyles = makeStyles(theme => ({
     },
     h2Title: {
         fontSize: "2.5rem",
-        textAlign: "center",    
+        textAlign: "center",  
+        ...theme.typography.tab,  
         padding: theme.spacing(1),
         color: theme.palette.primary.light,
         animation: "$fadeIn .5s ease-in-out",

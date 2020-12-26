@@ -3,6 +3,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { HiMenu } from 'react-icons/hi';
 import { Tabs, Tab, useMediaQuery} from '@material-ui/core'
 import {  Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import './sidebar.css'
 
 const useStyles = makeStyles(theme => ({
@@ -45,6 +46,8 @@ export const SideBar = () => {
     const handleClick = () => setClick(!click);
     const theme = useTheme()
     const matches = useMediaQuery(theme.breakpoints.down("xs"))
+    const reduxState = useSelector(state => state.auth)
+    const { isLogged } = reduxState
     return (
         <>
         <div className={click ? 'sidebarActive' : 'sidebarInactive'}>
@@ -52,8 +55,15 @@ export const SideBar = () => {
         
                     <Tab className={classes.tabSidebar} label="Inicio" to="/" component={Link} onClick={handleClick}/>
                     <Tab className={classes.tabSidebar} label="Quienes somos" to="/" component={Link} onClick={handleClick}/>
+                    {isLogged ? 
+                                        <Tab className={classes.tabSidebar} label="Cerrar sesion" to="/" component={Link} onClick={handleClick}/>
+                    :
+                    <>
                     <Tab className={classes.tabSidebar} label="Iniciar sesion" to="/login" component={Link} onClick={handleClick}/>
                     <Tab className={classes.tabSidebar} label="Crear cuenta" to="/register" component={Link} onClick={handleClick}/>
+                    </>
+                    }
+                    
         </Tabs>
         </div>
         {matches &&

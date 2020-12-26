@@ -8,8 +8,10 @@ import imgForm from '../../images/adoptar3.jpg'
 import { StyledBtn } from '../../styles/Buttons'
 import {  purple, green } from '@material-ui/core/colors';
 import { BackButton } from '../../styles/Buttons'
-
-
+import { loginUser } from '../../firebase/config'
+import { loginError, login } from '../../actions/auth'
+import { useDispatch, useSelector } from 'react-redux';
+import { useAuth } from '../../hooks/useAuth'
 const useStyles = makeStyles((theme)=>({
     sectionRegister: {
         position: "relative",
@@ -193,11 +195,21 @@ const useStyles = makeStyles((theme)=>({
 export const LoginForm = () => {
     const classes = useStyles()
     const history = useHistory()
-
-    //BackBtn
-    const back = () => {
-        history.push('/')
-    }
+    const dispatch = useDispatch()
+    const user = useAuth()
+    const { errorLogin } = useSelector(state => state.auth)
+    
+   const loginAccount = async (values) => {
+        try {
+            await loginUser(values.email, values.password)
+            dispatch(login(user.uid, user.displayName))
+            history.push('/')
+          
+        } catch (error) {
+            console.log(error)
+            dispatch(loginError('Ocurrio un error. Intente conectarse nuevamente'))
+        }
+   }
     return (
         <Formik initialValues={{email: "", password: ""}}
         validationSchema = {Yup.object({
@@ -208,9 +220,9 @@ export const LoginForm = () => {
             .required('Por favor introduce tu contraseña')
         })}
         onSubmit={(values, {setSubmitting}) => {
-             
-               console.log(JSON.stringify( values, null, 2));
-
+                setSubmitting(true)
+                loginAccount(values)
+                setSubmitting(false)
         }}>
        {( {isValid, dirty})=>(
             <section className={classes.sectionRegister}>
@@ -226,7 +238,8 @@ export const LoginForm = () => {
  
                                  <Field as={TextField} type="password" classes={{root: classes.field}} name="password" label="Introduce tu contraseña" variant="outlined" color="secondary" autoComplete="off" size="small"/>
                                  <ErrorMessage name="password" component="small" className={classes.errorMessage} />
-                                 <StyledBtn disabled={!(isValid && dirty)}>Entrar</StyledBtn>
+                                 <StyledBtn type="submit" disabled={!(isValid && dirty)}>Entrar</StyledBtn>
+                                 <p className={classes.errorMessage}>{errorLogin}</p>
                                  <div className={classes.authContainer}>
                                         <Typography className={classes.register_h1}>Login with:</Typography>
 

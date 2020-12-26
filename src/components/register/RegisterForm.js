@@ -5,9 +5,13 @@ import { Formik, Form, ErrorMessage, Field} from 'formik'
 import * as Yup from 'yup';
 import { useHistory, Link } from 'react-router-dom'
 import imgForm from '../../images/adoptar1.jpg'
-import {  purple, green } from '@material-ui/core/colors';
+import {  purple } from '@material-ui/core/colors';
 import { StyledBtn } from '../../styles/Buttons'
 import { BackButton } from '../../styles/Buttons'
+import { useDispatch } from 'react-redux'
+import { loginError, login } from '../../actions/auth'
+import { createUser } from '../../firebase/config'
+import { useAuth } from '../../hooks/useAuth'
 const useStyles = makeStyles((theme)=>({
     sectionRegister: {
         position: "relative",
@@ -184,8 +188,28 @@ const useStyles = makeStyles((theme)=>({
 export const RegisterForm = () => {
     const classes = useStyles()
     const history = useHistory()
+   const dispatch = useDispatch()
+   const user = useAuth()
+  
+    const createAccount = async ( values ) => {
+       
+            try {
+                await createUser(values.name, values.email, values.password)
+                dispatch(login(user.uid, user.displayName))
+                setTimeout(() => {
+                    history.push('/')
+                  
+                }, 1000);
+            } catch (error) {
+                console.log(error.message)
+                dispatch(loginError(error.message))
+            }
+        
+       
+    }
+ 
 
-
+   
     return (
         <Formik initialValues={{name: "", email: "", password: "", repeat: ""}}
         validationSchema = {Yup.object({
@@ -207,9 +231,12 @@ export const RegisterForm = () => {
             .oneOf([Yup.ref('password'), null], 'Las contraseñas no coinciden')
         })}
         onSubmit={(values, {setSubmitting}) => {
+               setSubmitting(true)
+               createAccount(values)
              
-               console.log(JSON.stringify( values, null, 2));
-
+               console.log(values.email);
+               setSubmitting(false)
+               
         }}>
        {( {isValid, dirty})=>(
            <section className={classes.sectionRegister}>
@@ -231,7 +258,7 @@ export const RegisterForm = () => {
                                 <Field as={TextField} type="password"  classes={{root: classes.field}} name="confirm" label="Repita tu contraseña" variant="outlined" color="secondary" autoComplete="off"/>
                                 <ErrorMessage name="confirm" component="small" className={classes.errorMessage} />
 
-                                <StyledBtn disabled={!(isValid && dirty)} onClick={() => console.log('asd')}>Crear cuenta</StyledBtn>
+                                <StyledBtn type="submit" disabled={!(isValid && dirty)}>Crear cuenta</StyledBtn>
                         <Typography variant="h4" className={classes.connectLink}>Ya tenés cuenta? Conectate <Link to="/login" className={classes.loginLink}>acá</Link></Typography>
                         <BackButton onClick={() => history.push('/')}>Volver</BackButton>
                         </div>

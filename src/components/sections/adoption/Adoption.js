@@ -155,7 +155,7 @@ const useStyles = makeStyles(theme => ({
     },
     h2typ: {
         ...theme.typography.tab,
-        color: theme.palette.primary.main,
+        color: theme.palette.primary.dark,
         padding: theme.spacing(.5),
         [theme.breakpoints.down('xs')]: {
             fontSize: ".7rem",

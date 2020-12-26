@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import adoptr from '../../images/adoptr.png'
@@ -7,6 +7,9 @@ import {  Link, useHistory } from 'react-router-dom'
 import { Tabs, Tab, Button, useMediaQuery } from '@material-ui/core'
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { SideBar } from './Sidebar'
+import { startLogOut } from '../../actions/auth'
+
+import { useDispatch, useSelector } from 'react-redux'
 
 const useStyles = makeStyles(theme => ({
     toolbarMargin: {
@@ -110,9 +113,17 @@ export const NavBar = () => {
     const classes = useStyles()
     const theme = useTheme()
     const history = useHistory()
-
     const matches = useMediaQuery(theme.breakpoints.down("xs"))
-
+    const reduxState = useSelector(state => state.auth)
+    const { isLogged } = reduxState
+    const dispatch = useDispatch()
+    
+    const startLogOutFn = () => {
+        dispatch(startLogOut())
+        
+        
+    }
+ 
     
     return (
         <>
@@ -122,14 +133,15 @@ export const NavBar = () => {
                <img src={adoptr} alt="logo-img" className={classes.logo}/>
             </Button>
                <Tabs className={classes.tabsContainer}
-               indicatorColor="secondary">
+               indicatorColor="secondary"
+               >
                    {matches ?
                    null
                    : 
                    <>
-                     <Tab className={classes.tab} label="Inicio" to="/" component={Link}/>
-                     <Tab className={classes.tab} label="Quienes somos" to="/" component={Link}/>
-                     </>
+                     <Tab className={classes.tab} label="Inicio" to="/" component={Link} />
+                     <Tab className={classes.tab} label="Quienes somos" to="/" component={Link} />
+                     </> 
                    }
               
                </Tabs>
@@ -143,8 +155,17 @@ export const NavBar = () => {
                     </>
                    :
                    <>
-                   <Tab className={classes.tab} label="Iniciar sesion" to="/login" component={Link}/>
-                   <Tab className={classes.tab} label="Crear cuenta" to="/register" component={Link}/>
+                   {isLogged ? 
+                  <Tab className={classes.tab} label="Cerrar sesion" to="/" component={Link} onClick={startLogOutFn}/>
+                  :
+                  <>
+                   
+                  <Tab className={classes.tab} label="Iniciar sesion" to="/login" component={Link} />
+                  <Tab className={classes.tab} label="Crear cuenta" to="/register" component={Link} />
+                  </>
+                  
+                   }
+                  
                   
                    </>
                    }

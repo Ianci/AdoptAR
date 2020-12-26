@@ -4,6 +4,6 @@ export const types = {
     registerError: '[AUTH] REGISTER_ERROR',
     login: '[AUTH] LOGIN_SUCCESS',
     loginError: '[AUTH] LOGIN_ERROR',
-
+    logOut: '[AUTH] LOG_OUT'
 
 }
