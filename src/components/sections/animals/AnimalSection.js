@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Typography } from '@material-ui/core'
+import { Container, Typography, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import adoptr from '../../../images/adoptr.png'
 import { Link, useHistory } from 'react-router-dom';
@@ -67,7 +67,8 @@ const useStyles = makeStyles(theme => ({
         "&:hover" : {
             transform: "translateY(-5px)"
         }
-    }
+    },
+   
 }))
 
 export const AnimalSection = () => {
@@ -101,7 +102,13 @@ export const AnimalSection = () => {
                      <Link to="/register" className={classes.linkUser}><Typography  variant="h3" className={classes.nav_tab}>Crear cuenta</Typography></Link>
                     </>
                     }
-             
+                      <TextField
+                        id="outlined-secondary"
+                        label="Outlined secondary"
+                        variant="outlined"
+                        color="secondary"
+                        classes={{root: classes.root}}
+                    />
                 </div>
                 </nav>
             
