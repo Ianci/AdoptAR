@@ -108,7 +108,7 @@ export const RegisterSucesFull = () => {
     const dispatch = useDispatch()
     const reduxUser = () => {
         dispatch(login(user.uid, user.displayName))
-        history.push('/')
+        history.push('/animal-list')
     }
     return (
         <section className={classes.sectionRegister}>

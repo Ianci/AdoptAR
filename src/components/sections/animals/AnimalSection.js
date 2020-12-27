@@ -60,6 +60,13 @@ const useStyles = makeStyles(theme => ({
     },
     linkUser: {
         textDecoration: "none"
+    },
+    publishedBtn: {
+        transition: "all .4 ease-in",
+        marginLeft: theme.spacing(1),
+        "&:hover" : {
+            transform: "translateY(-5px)"
+        }
     }
 }))
 
@@ -83,7 +90,7 @@ export const AnimalSection = () => {
 
                 <img src={adoptr} alt="adopt" className={classes.adoptrLogo}/>
                 <Link to="/" className={classes.linkUser}><Typography  variant="h3" className={classes.nav_tab}>Home</Typography></Link>
-                <StyledBtn type="button" onClick={()=> history.push('/new-animal')}>Publicar</StyledBtn>
+                {isLogged &&  <StyledBtn type="button" className={classes.publishedBtn}onClick={()=> history.push('/new-post')}>Publicar</StyledBtn>}
                 </div>
                 <div className={classes.rightContent}>
                     {isLogged ? 
