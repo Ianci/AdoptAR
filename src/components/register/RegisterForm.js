@@ -8,10 +8,10 @@ import imgForm from '../../images/adoptar1.jpg'
 import {  purple } from '@material-ui/core/colors';
 import { StyledBtn } from '../../styles/Buttons'
 import { BackButton } from '../../styles/Buttons'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { loginError, login } from '../../actions/auth'
 import { createUser } from '../../firebase/config'
-import { useAuth } from '../../hooks/useAuth'
+
 const useStyles = makeStyles((theme)=>({
     sectionRegister: {
         position: "relative",
@@ -188,16 +188,15 @@ const useStyles = makeStyles((theme)=>({
 export const RegisterForm = () => {
     const classes = useStyles()
     const history = useHistory()
-   const dispatch = useDispatch()
-   const user = useAuth()
+    const dispatch = useDispatch()
+    const { errorLogin } = useSelector(state => state.auth)
   
     const createAccount = async ( values ) => {
        
             try {
                 await createUser(values.name, values.email, values.password)
-                dispatch(login(user.uid, user.displayName))
                 setTimeout(() => {
-                    history.push('/')
+                    history.push('/succesfull-register')
                   
                 }, 1000);
             } catch (error) {
@@ -259,8 +258,9 @@ export const RegisterForm = () => {
                                 <ErrorMessage name="confirm" component="small" className={classes.errorMessage} />
 
                                 <StyledBtn type="submit" disabled={!(isValid && dirty)}>Crear cuenta</StyledBtn>
+                                <p className={classes.errorMessage}>{errorLogin}</p>
                         <Typography variant="h4" className={classes.connectLink}>Ya tenés cuenta? Conectate <Link to="/login" className={classes.loginLink}>acá</Link></Typography>
-                        <BackButton onClick={() => history.push('/')}>Volver</BackButton>
+                        <BackButton onClick={() => history.push('/animal-list')}>Volver</BackButton>
                         </div>
                     </Form>
                </div>

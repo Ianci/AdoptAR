@@ -202,12 +202,15 @@ export const LoginForm = () => {
    const loginAccount = async (values) => {
         try {
             await loginUser(values.email, values.password)
-            dispatch(login(user.uid, user.displayName))
-            history.push('/')
+            setTimeout(() => {
+                history.push('/succesfull-login')
+              
+            }, 1000);
+            
           
         } catch (error) {
             console.log(error)
-            dispatch(loginError('Ocurrio un error. Intente conectarse nuevamente'))
+            dispatch(loginError(error.message))
         }
    }
     return (

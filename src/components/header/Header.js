@@ -3,6 +3,8 @@ import { NavBar } from './NavBar'
 import  section2  from '../../images/section2.svg'
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+import { BackButton, StyledBtn } from '../../styles/Buttons';
+import { useHistory } from 'react-router-dom'
 
 
 const useStyles = makeStyles(theme => ({
@@ -101,10 +103,26 @@ const useStyles = makeStyles(theme => ({
     },
     titleContainer: {
         alignSelf: "center",
+    },
+    btn: {
+        width: "50%",
+        left: "13rem",
+        [theme.breakpoints.up('md')]: {
+            left: "8rem"
+          },
+          [theme.breakpoints.up('lg')]: {
+            left: "13rem"
+          },
+        [theme.breakpoints.down(600)] : {
+            width: "100%",
+            margin: "0 auto",
+            left: ".1rem",
+         },
     }
 }))
 export const Header = () => {
     const classes = useStyles()
+    const history = useHistory()
     return (
         <>
         <NavBar />
@@ -114,6 +132,7 @@ export const Header = () => {
 
         <Typography variant="h1" component="h1" className={classes.h1Title}>Somos Adopt<span className={classes.spanAR}>AR</span></Typography>
         <Typography variant="h2" component="h4" className={classes.h2Title}>Tu portal para adoptar o publicar un animal en adopción</Typography>
+        <StyledBtn className={classes.btn} type="button" onClick={()=> history.push("/animal-list")}>Ver los animales en adopción</StyledBtn>
         </div>
         
        

@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import adoptr from '../../images/adoptr.png'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {  Link, useHistory } from 'react-router-dom'
-import { Tabs, Tab, Button, useMediaQuery } from '@material-ui/core'
+import { Tabs, Button, useMediaQuery, Typography} from '@material-ui/core'
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { SideBar } from './Sidebar'
-import { startLogOut } from '../../actions/auth'
 
-import { useDispatch, useSelector } from 'react-redux'
+
+import { useDispatch } from 'react-redux'
+import { StyledBtn } from '../../styles/Buttons';
 
 const useStyles = makeStyles(theme => ({
     toolbarMargin: {
@@ -65,6 +66,7 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.primary.main,
         minWidth: 12,
         marginLeft: theme.spacing(1),
+        textShadow: '0px 3px 20px rgba(0,0,0,0.5)',
         transition: "all .3s ease-out",
         "&:hover": {
         transform: "scale(1.20)"
@@ -106,6 +108,11 @@ const useStyles = makeStyles(theme => ({
     },
     sideBarInactive: {
         color: "black"
+    },
+    btnNav: {
+        marginBottom: theme.spacing(.5),
+        margin: 0,
+        marginLeft: theme.spacing(.8),
     }
 }));
 
@@ -114,15 +121,10 @@ export const NavBar = () => {
     const theme = useTheme()
     const history = useHistory()
     const matches = useMediaQuery(theme.breakpoints.down("xs"))
-    const reduxState = useSelector(state => state.auth)
-    const { isLogged } = reduxState
-    const dispatch = useDispatch()
+   
+   
     
-    const startLogOutFn = () => {
-        dispatch(startLogOut())
-        
-        
-    }
+  
  
     
     return (
@@ -135,49 +137,19 @@ export const NavBar = () => {
                <Tabs className={classes.tabsContainer}
                indicatorColor="secondary"
                >
-                   {matches ?
-                   null
-                   : 
-                   <>
-                     <Tab className={classes.tab} label="Inicio" to="/" component={Link} />
-                     <Tab className={classes.tab} label="Quienes somos" to="/" component={Link} />
-                     </> 
-                   }
+                 
+                     <Typography variant="h3" className={classes.tab} >Inicio</Typography>
+                     <StyledBtn type="button" className={classes.btnNav} onClick={() => history.push('/animal-list')}>ADOPCIÓN</StyledBtn>
+                     
+                   
               
                </Tabs>
-               <Tabs className={classes.tabContainer}
-               indicatorColor="secondary">
-                   {matches ? 
-                   <>
-                    
-                    <AiOutlineUserAdd className={classes.iconUser} onClick={ () => history.push('/login')}/>
-
-                    </>
-                   :
-                   <>
-                   {isLogged ? 
-                  <Tab className={classes.tab} label="Cerrar sesion" to="/" component={Link} onClick={startLogOutFn}/>
-                  :
-                  <>
-                   
-                  <Tab className={classes.tab} label="Iniciar sesion" to="/login" component={Link} />
-                  <Tab className={classes.tab} label="Crear cuenta" to="/register" component={Link} />
-                  </>
-                  
-                   }
-                  
-                  
-                   </>
-                   }
-                  
-
-                  
-               </Tabs>
+              
             </Toolbar>
         </AppBar>
         
         <div className={classes.toolbarMargin} />
-        <SideBar />
+        
         </>
     )
 }
