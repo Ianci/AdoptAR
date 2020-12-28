@@ -9,8 +9,8 @@ import {  purple } from '@material-ui/core/colors';
 import { StyledBtn } from '../../../styles/Buttons'
 import { BackButton } from '../../../styles/Buttons'
 import { useDispatch, useSelector } from 'react-redux'
-
-
+import { firebase, db } from '../../../firebase/config'
+import FileUploader from 'react-firebase-file-uploader'
 const useStyles = makeStyles((theme)=>({
     sectionRegister: {
         position: "relative",
@@ -127,6 +127,45 @@ const useStyles = makeStyles((theme)=>({
     },
     btnBack: {
         width: "10%"
+    },
+    labelForm: {
+        fontSize: "1.2rem",
+        letterSpacing: 1.333,
+        fontWeight: 500,
+        marginLeft: theme.spacing(.8),
+    },
+    fieldForm: {
+        outline: "none",
+        width: "26rem",
+        height: "2rem",
+        marginLeft: theme.spacing(.8),
+        border: "1px solid purple",
+        background: "transparent",
+        borderRadius: "4px",
+        "&:hover": {
+        border: "1px solid green"
+        }
+    },
+    textAreaForm: {
+        marginTop: theme.spacing(1),
+        resize: "none",
+        outline: "none",
+        width: "26rem",
+        height: "22rem",
+        marginLeft: theme.spacing(.8),
+        border: "1px solid purple",
+        background: "transparent",
+        borderRadius: "4px",
+        "&:hover": {
+        border: "1px solid green"
+        },
+        "&::placeholder": {
+            fontSize: "1rem",
+            fontFamily: "Roboto"
+        }
+    },
+    divContainer: {
+        display: "flex"
     }
 }));
 
@@ -136,12 +175,22 @@ export const NewPostForm = () => {
     const history = useHistory()
     const dispatch = useDispatch()
     const { errorLogin } = useSelector(state => state.auth)
-  
-  
 
+    const [ photoUrl , setPhotoUrl] = useState(null)
+  
+    console.log(photoUrl)
+  
+    const handleChange = async (e) => {
+        const file = e.target.files[0]
+        const storageRef = firebase.storage().ref()
+        const fileRef = storageRef.child(file.name)
+        await fileRef.put(file)
+        setPhotoUrl(await fileRef.getDownloadURL())
+        
+    }
    
     return (
-        <Formik initialValues={{name: "", raza: ""}}
+        <Formik initialValues={{name: "", raza: "", size: "", sexo: "", textarea: '', age: "", animalProfilePic: undefined}}
         validationSchema = {Yup.object({
             name: Yup.string()
             .required('Completa este campo')
@@ -149,11 +198,23 @@ export const NewPostForm = () => {
             raza: Yup.string()
             .required('Completa este campo')
             .max(30, '30 caracteres máximo'),
+            age: Yup.number()
+            .required('Completa este campo')
+            .max(25),
+            size: Yup.string()
+            .required('Required'),
+            sexo: Yup.string()
+            .required('Required'),
+            textarea: Yup.string()
+            .required('Required'),
+            animalProfilePic: Yup.mixed()
           
         })}
         onSubmit={(values, {setSubmitting}) => {
                setSubmitting(true)
+               
                console.log(values)
+               history.push('/new-post-second')
                setSubmitting(false)
                
         }}>
@@ -170,27 +231,37 @@ export const NewPostForm = () => {
                                 <Field as={TextField} type="text" name="raza" classes={{root: classes.field}} label="Raza" variant="outlined" color="secondary" autoComplete="off" size="small"/>
                                 <ErrorMessage name="name" component="small" className={classes.errorMessage} />
 
-                                <label htmlFor="number">Edad</label>
-                                <Field as="input" type="number" name="age" className="" label="Edad" id="number" max="100"/>
+                                <div className={classes.divContainer}>
+                                <label htmlFor="number" className={classes.labelForm}>Edad</label>
+                                <Field as="input" type="number" name="age"className={classes.fieldForm} label="Edad" id="number" max="100"/>
 
-                                <label htmlFor="dog-size">Tamaño</label>
-                                <Field name="size" as="select" className="my-select" id="dog-size">
-                                    <option value="red">Chico</option>
-                                    <option value="green">Mediano</option>
-                                    <option value="blue">Grande</option>
+                                <label htmlFor="dog-size" className={classes.labelForm}>Tamaño</label>
+                                <Field name="size" as="select" id="dog-size" className={classes.fieldForm}>
+                                    <option value="" disabled="disabled">--Seleccionar--</option>
+                                
+                                    <option value="Chico">Chico</option>
+                                    <option value="Mediano">Mediano</option>
+                                    <option value="Grande">Grande</option>
                                 </Field>
+      
+                                </div>
 
-                                <label htmlFor="sex">Sexo</label>
-                                <Field name="size" as="select" className="my-select" id="sex">
+                                <label htmlFor="sex" className={classes.labelForm}>Sexo</label>
+                                <Field name="sexo" as="select" className={classes.fieldForm} id="sex">
+                                    <option value="" disabled="disabled">--Seleccionar--</option>
                                     <option value="Hembra">Hembra</option>
                                     <option value="Macho">Macho</option>
                                     
                                 </Field>
-                                
-                                <Field as={TextareaAutosize} classes={{root: classes.field}} name="textarea" placeholder="Describe al animal" autoComplete="off"/>
-                                <ErrorMessage name="password" component="small" className={classes.errorMessage} />
 
-                                <StyledBtn type="submit" disabled={!(isValid && dirty)} onClick={() => history.push('/new-post-second')}>Siguiente</StyledBtn>
+                                <Field as={TextField} type="file" name="animalProfilePic" classes={{root: classes.field}} label="Foto del animal" variant="outlined" color="secondary" autoComplete="off" size="small"
+                                onChange={handleChange}/>
+                                <ErrorMessage name="animalProfilePic" component="small" className={classes.errorMessage} />
+
+                                <Field as={TextareaAutosize} className={classes.textAreaForm} name="textarea" placeholder="Describe al animal" autoComplete="off" rowsMax={4}/>
+                                <ErrorMessage name="textarea" component="small" className={classes.errorMessage} />
+
+                                <StyledBtn type="submit" disabled={!(isValid && dirty)}>Siguiente</StyledBtn>
                                 <p className={classes.errorMessage}>{errorLogin}</p>
  
                         <BackButton onClick={() => history.push('/animal-list')} className={classes.btnBack}>Volver</BackButton>

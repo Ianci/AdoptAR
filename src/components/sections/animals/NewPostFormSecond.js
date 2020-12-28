@@ -141,15 +141,20 @@ export const NewPostFormSecond = () => {
 
    
     return (
-        <Formik initialValues={{name: "", raza: ""}}
+        <Formik initialValues={{name: "", city: "", cel: "", email: ""}}
         validationSchema = {Yup.object({
             name: Yup.string()
             .required('Completa este campo')
             .max(15, 'Tu nombre debe contener 15 caracteres máximo'),
-            raza: Yup.string()
+            city: Yup.string()
             .required('Completa este campo')
-            .max(30, '30 caracteres máximo'),
-          
+            .max(25, '25 caracteres máximo'),
+            email: Yup.string()
+            .email('Introduce un email válido')
+            .required('Completa el campo con tu email'),
+            cel: Yup.number()
+            .required('Completa este campo')
+
         })}
         onSubmit={(values, {setSubmitting}) => {
                setSubmitting(true)
@@ -168,15 +173,15 @@ export const NewPostFormSecond = () => {
                                 <ErrorMessage name="name" component="small" className={classes.errorMessage} />
 
                                 <Field as={TextField} type="text" name="cel" classes={{root: classes.field}} label="Teléfono de contacto (opcional)" variant="outlined" color="secondary" autoComplete="off" size="small"/>
-                                <ErrorMessage name="name" component="small" className={classes.errorMessage} />
+                                <ErrorMessage name="cel" component="small" className={classes.errorMessage} />
 
                                 <Field as={TextField} type="text" name="email" classes={{root: classes.field}} label="Email de contacto" variant="outlined" color="secondary" autoComplete="off" size="small"/>
-                                <ErrorMessage name="name" component="small" className={classes.errorMessage} />
+                                <ErrorMessage name="email" component="small" className={classes.errorMessage} />
                                 
                                 <Field as={TextField} type="text" name="city" classes={{root: classes.field}} label="Ciudad" variant="outlined" color="secondary" autoComplete="off" size="small"/>
-                                <ErrorMessage name="name" component="small" className={classes.errorMessage} />
+                                <ErrorMessage name="city" component="small" className={classes.errorMessage} />
 
-                                <StyledBtn type="submit" disabled={!(isValid && dirty)} onClick={() => history.push('/new-post-second')}>Subir</StyledBtn>
+                                <StyledBtn type="submit" disabled={!(isValid && dirty)}>Subir</StyledBtn>
                                 <p className={classes.errorMessage}>{errorLogin}</p>
  
                         <BackButton onClick={() => history.push('/animal-list')} className={classes.btnBack}>Volver</BackButton>
