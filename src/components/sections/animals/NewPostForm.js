@@ -175,11 +175,9 @@ export const NewPostForm = () => {
     const history = useHistory()
     const dispatch = useDispatch()
     const { errorLogin } = useSelector(state => state.auth)
-
+    //Upload image to Storage
     const [ photoUrl , setPhotoUrl] = useState(null)
-  
-    console.log(photoUrl)
-  
+    
     const handleChange = async (e) => {
         const file = e.target.files[0]
         const storageRef = firebase.storage().ref()
@@ -187,6 +185,15 @@ export const NewPostForm = () => {
         await fileRef.put(file)
         setPhotoUrl(await fileRef.getDownloadURL())
         
+    }
+
+    //New post
+    const newPost = async ( values ) => {
+        try {
+            
+        } catch (error) {
+            console.log(error)
+        }
     }
    
     return (
@@ -223,6 +230,7 @@ export const NewPostForm = () => {
            <div className={classes.register}>
                <div className={classes.registerContainer}>
                     <Form className={classes.registerForm}>
+                        
                         <div className={classes.registerBody}>
                         <Typography variant="h2" className={classes.register_h1}>Nuevo post</Typography>
                                 <Field as={TextField} type="text" name="name" classes={{root: classes.field}} label="Nombre del animal" variant="outlined" color="secondary" autoComplete="off" size="small"/>
@@ -261,11 +269,16 @@ export const NewPostForm = () => {
                                 <Field as={TextareaAutosize} className={classes.textAreaForm} name="textarea" placeholder="Describe al animal" autoComplete="off" rowsMax={4}/>
                                 <ErrorMessage name="textarea" component="small" className={classes.errorMessage} />
 
-                                <StyledBtn type="submit" disabled={!(isValid && dirty)}>Siguiente</StyledBtn>
+                               
+
+                                <StyledBtn type="submit" disabled={!(isValid && dirty)}>Subir</StyledBtn>
                                 <p className={classes.errorMessage}>{errorLogin}</p>
+
+                               
  
                         <BackButton onClick={() => history.push('/animal-list')} className={classes.btnBack}>Volver</BackButton>
                         </div>
+                        
                     </Form>
                </div>
            </div>
