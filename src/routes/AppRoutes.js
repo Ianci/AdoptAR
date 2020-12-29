@@ -10,7 +10,7 @@ import { RegisterSucesFull } from '../components/register/RegisterSucesFull'
 import { LoginSucesFull } from '../components/login/SuccesFullLogin'
 import { AnimalSection } from '../components/sections/animals/AnimalSection'
 import { NewPost } from '../components/sections/animals/NewPost'
-import { NewPostFormSecond } from '../components/sections/animals/NewPostFormSecond'
+    
 //Material
 import { PublicRoute } from '../routes/PublicRoutes'
 import { PrivateRoute } from '../routes/PrivateRoutes'
@@ -40,7 +40,7 @@ export const AppRoutes = () => {
             <Route path="/succesfull-login" component={LoginSucesFull} />
             <Route path="/animal-list" component={AnimalSection} />
             <Route path="/new-post" isAuthenticated={isLogged} component={NewPost} />
-            <Route path="/new-post-second" isAuthenticated={isLogged} component={NewPostFormSecond} />
+        
             <Redirect to="/" />
 
             </Switch>

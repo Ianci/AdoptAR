@@ -5,7 +5,7 @@ const initialState = {
     error: null,
     loading: false
 }
-export const postReducer = (state = initialState, action) => {
+export const uiReducer = (state = initialState, action) => {
     const { type, payload } = action
     switch (type) {
         case types.startLoading:
