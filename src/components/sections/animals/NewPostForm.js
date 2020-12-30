@@ -11,6 +11,8 @@ import { BackButton } from '../../../styles/Buttons'
 import { useDispatch, useSelector } from 'react-redux'
 import { firebase, db } from '../../../firebase/config'
 import { loadingAction, errorHandler, endLoading} from '../../../actions/ui'
+import { LoadingPage } from '../../loading/LoadingPage';
+
 const useStyles = makeStyles((theme)=>({
     sectionRegister: {
         position: "relative",
@@ -222,7 +224,7 @@ export const NewPostForm = () => {
             setTimeout(() => {
                 history.push('/animal-list')
                 dispatch(endLoading())
-            }, 3000); 
+            }, 99999); 
 
         } catch (error) {
             console.log(error)
@@ -279,12 +281,14 @@ export const NewPostForm = () => {
            <div className={classes.register}>
                <div className={classes.registerContainer}>
                     <Form className={classes.registerForm}>
-                        {loading ? <p>Loading...</p>
-                    :    
+
                     <div className={classes.registerBody}>
-                    {click ?
+                    {click 
+                    ?
                     <Typography variant="h2" className={classes.register_h1}>Datos de contacto</Typography>  
-                    : <Typography variant="h2" className={classes.register_h1}>Nuevo post</Typography>}
+                    : 
+                    <Typography variant="h2" className={classes.register_h1}>Nuevo post</Typography>
+                    }
                     
 
                    {click ? 
@@ -356,7 +360,7 @@ export const NewPostForm = () => {
                     
                           
                     </div>
-                    }
+                    
                        
                         
                     </Form>
