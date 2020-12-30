@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Typography, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import adoptr from '../../../images/adoptr.png'
@@ -6,6 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { StyledBtn } from '../../../styles/Buttons';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogOut } from '../../../actions/auth';
+import { db, firebase } from '../../../firebase/config'
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -72,15 +73,34 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export const AnimalSection = () => {
+    const [ data, setData] = useState([])
     const classes = useStyles()
     const history = useHistory()
     const dispatch = useDispatch()
     const reduxState = useSelector(state => state.auth)
     const { isLogged } = reduxState
 
+    //Get posts 
+    useEffect(async() => {
+      const getPosts = ()=> {
+        db.collection('posts').orderBy('date', 'desc').onSnapshot(postsSnapshot)
+      } 
+      getPosts()
+    }, [])
+
+    const postsSnapshot = (snapshot) => {
+        const post = snapshot.docs.map(doc => {
+            return{
+                id: doc.id,
+                ...doc.data()
+            }
+        })
+        setData(post)
+    }
+
+    //Logout Function
     const startLogOutFn = () => {
         dispatch(startLogOut())
-        
     }
 
     return (
