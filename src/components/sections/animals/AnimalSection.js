@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Typography, TextField } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
+import { Container, Typography, TextField, useMediaQuery } from '@material-ui/core'
+import { makeStyles, useTheme } from '@material-ui/styles'
 import adoptr from '../../../images/adoptr.png'
 import { Link, useHistory } from 'react-router-dom';
 import { StyledBtn } from '../../../styles/Buttons';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogOut } from '../../../actions/auth';
-import { db, firebase } from '../../../firebase/config'
-
+import { db, firebase } from '../../../firebase/config';
+import { LogoutBtn, LoginOptions } from './uiButtons';
+import { SearchForm } from './SearchForm'
 const useStyles = makeStyles(theme => ({
-    container: {
+    MuiContainer: {
         background:"#D90368",
         margin: "0 auto",
         minHeight: "70vw",
-        boxShadow: "0px 12px 30px rgba(0,0,0,0.3)"
+        boxShadow: "0px 12px 30px rgba(0,0,0,0.3)",
+       
+        [theme.breakpoints.down(600)] : {
+            maxWidth: "100%",
+            margin: 0,
+            padding: 0,
+           
+        }
     },
     adoptrLogo: {
         marginTop: "3rem",
@@ -24,10 +32,12 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('md')]: {
             height: "9rem",
             width: "9rem",
+            margin: 0
          },
-         [theme.breakpoints.down('xs')] : {
+         [theme.breakpoints.down(600)] : {
             height: "5rem",
-            width: "5rem"
+            width: "5rem",
+            margin: 0
          }
     },
     navBar: {
@@ -37,6 +47,10 @@ const useStyles = makeStyles(theme => ({
         alignItems: "center",
         position: "relative",
         justifyContent: "space-between",
+        [theme.breakpoints.down(600)] : {
+            
+           
+        }
     },
   
     leftContent: {
@@ -47,7 +61,11 @@ const useStyles = makeStyles(theme => ({
     rightContent: {
         display: "flex",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        [theme.breakpoints.down(600)] : {
+            
+           
+        }
     },
     nav_tab: {
         ...theme.typography.tab,
@@ -57,6 +75,10 @@ const useStyles = makeStyles(theme => ({
         transition: "all .3s ease-out",
         "&:hover": {
         transform: "scale(1.05)"
+        },
+        [theme.breakpoints.down(600)] : {
+            padding: theme.spacing(.1),
+            fontSize: ".9rem"
         }
     },
     linkUser: {
@@ -79,6 +101,8 @@ export const AnimalSection = () => {
     const dispatch = useDispatch()
     const reduxState = useSelector(state => state.auth)
     const { isLogged } = reduxState
+    const theme = useTheme()
+    const matches = useMediaQuery(theme.breakpoints.down(600))
 
     //Get posts 
     useEffect(async() => {
@@ -104,7 +128,7 @@ export const AnimalSection = () => {
     }
 
     return (
-        <Container maxWidth="lg" className={classes.container} disableGutters>
+        <Container maxWidth="lg" classes={{root: classes.MuiContainer}} disableGutters>
             
                 <nav className={classes.navBar}>
                 <div className={classes.leftContent}>
@@ -114,23 +138,18 @@ export const AnimalSection = () => {
                 {isLogged &&  <StyledBtn type="button" className={classes.publishedBtn}onClick={()=> history.push('/new-post')}>Publicar</StyledBtn>}
                 </div>
                 <div className={classes.rightContent}>
+                    
                     {isLogged ? 
-                    <Typography  variant="h3" className={classes.nav_tab} onClick={startLogOutFn}>Cerrar sesion</Typography>
+                    <LogoutBtn className={classes.nav_tab} onClick={startLogOutFn} />
                     :
-                    <>
-                     <Link to="/login" className={classes.linkUser}><Typography variant="h3" className={classes.nav_tab}>Iniciar sesion</Typography></Link>
-                     <Link to="/register" className={classes.linkUser}><Typography  variant="h3" className={classes.nav_tab}>Crear cuenta</Typography></Link>
-                    </>
+                    <LoginOptions />
                     }
-                      <TextField
-                        id="outlined-secondary"
-                        label="Outlined secondary"
-                        variant="outlined"
-                        color="secondary"
-                        classes={{root: classes.root}}
-                    />
+                    
                 </div>
                 </nav>
+                <div className="">
+                    <SearchForm />
+                </div>
             
 
         </Container>

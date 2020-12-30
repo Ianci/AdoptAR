@@ -12,6 +12,14 @@ const violet = "#34113F";
 const darkViolet = "#370D32"
 
 export const theme = createMuiTheme({
+    overrides: {
+        MuiContainer: {
+            root: {
+                paddingLeft: "30px",
+                paddingRight: "30px",
+            }
+        }
+    },
     palette: {
         common: {
             black: `${mainColor}`,

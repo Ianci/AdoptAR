@@ -133,7 +133,7 @@ export const Experiences = () => {
                                 <img src={data.image} alt="card" className={classes.card__img_back}/>
                             </div>
                             <div className="card__body">
-                                <Typography variant="h3"  className={classes.h2Expe}>Toby</Typography>
+                                <Typography variant="h3"  className={classes.h2Expe}>{data.name}</Typography>
                                 <Typography variant="body1" className={classes.paragraph}>"{data.body}"</Typography>
                             </div>
                         </div>
