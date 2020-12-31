@@ -9,6 +9,8 @@ import { startLogOut } from '../../../actions/auth';
 import { db, firebase } from '../../../firebase/config';
 import { LogoutBtn, LoginOptions } from './uiButtons';
 import { SearchForm } from './SearchForm'
+import { getPostsFromDb } from '../../../actions/post'
+
 const useStyles = makeStyles(theme => ({
     MuiContainer: {
         background:"#D90368",
@@ -91,11 +93,25 @@ const useStyles = makeStyles(theme => ({
             transform: "translateY(-5px)"
         }
     },
+    sideBar: {
+        flex: "0 0 40%",
+        background: "white",
+    },
+    main: {
+        flex: "1",
+        background: "yellow",
+    },
+    searchFormContainer: {
+
+        display: "flex",
+        justifyContent: "center",
+        alignContent: "center"
+    }
    
 }))
 
 export const AnimalSection = () => {
-    const [ data, setData] = useState([])
+   
     const classes = useStyles()
     const history = useHistory()
     const dispatch = useDispatch()
@@ -105,7 +121,7 @@ export const AnimalSection = () => {
     const matches = useMediaQuery(theme.breakpoints.down(600))
 
     //Get posts 
-    useEffect(async() => {
+    useEffect(() => {
       const getPosts = ()=> {
         db.collection('posts').orderBy('date', 'desc').onSnapshot(postsSnapshot)
       } 
@@ -119,7 +135,7 @@ export const AnimalSection = () => {
                 ...doc.data()
             }
         })
-        setData(post)
+       dispatch(getPostsFromDb(post))
     }
 
     //Logout Function
@@ -147,8 +163,11 @@ export const AnimalSection = () => {
                     
                 </div>
                 </nav>
-                <div className="">
+                <div>
+             
                     <SearchForm />
+                  
+               
                 </div>
             
 

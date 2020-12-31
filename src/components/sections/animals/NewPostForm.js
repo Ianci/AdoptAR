@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles} from '@material-ui/core/styles';
-import { TextField, Typography, TextareaAutosize} from '@material-ui/core'
+import { TextField, Typography, } from '@material-ui/core'
 import { Formik, Form, ErrorMessage, Field} from 'formik'
 import * as Yup from 'yup';
 import { useHistory, Link } from 'react-router-dom'
@@ -11,7 +11,7 @@ import { BackButton } from '../../../styles/Buttons'
 import { useDispatch, useSelector } from 'react-redux'
 import { firebase, db } from '../../../firebase/config'
 import { loadingAction, errorHandler, endLoading} from '../../../actions/ui'
-import { LoadingPage } from '../../loading/LoadingPage';
+
 
 const useStyles = makeStyles((theme)=>({
     sectionRegister: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme)=>({
     register: {
       
         width: "1200px",
-        minWidth: "1200px",
+       
         height: "40rem",
         boxShadow: "0 1.5rem 4rem rgba(0, 0, 0, 0.4)",
         margin: "0 auto",
@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme)=>({
             width: "100%",
             height: "103%",
             [theme.breakpoints.down(600)] : {
+                width: "330px",
                 backgroundImage: `linear-gradient(105deg, 
                     rgba(255, 255, 255, 0.9 ) 0%, 
                     rgba(255, 255, 255, 0.9) 20%, 
@@ -97,7 +98,7 @@ const useStyles = makeStyles((theme)=>({
     },
     errorMessage: {
         color: "red",
-        padding: theme.spacing(.5)
+        padding: theme.spacing(.1)
     },
     btnFace: {
         display: "flex",
@@ -107,10 +108,15 @@ const useStyles = makeStyles((theme)=>({
     },
     field: {
         margin: theme.spacing(.5),
+        [theme.breakpoints.down(600)] : {
+            color:"white"
+             
+          },
        
         '& fieldset': {
             borderColor: purple[700],
           },
+          
          
     },
     connectLink: {
@@ -128,7 +134,8 @@ const useStyles = makeStyles((theme)=>({
         }
     },
     btnBack: {
-        width: "40%"
+        width: "70%",
+        margin: "0 auto"
     },
     labelForm: {
         fontSize: "1.2rem",
@@ -140,13 +147,18 @@ const useStyles = makeStyles((theme)=>({
         outline: "none",
         width: "26rem",
         height: "2rem",
+        marginBottom: theme.spacing(.4),
         marginLeft: theme.spacing(.8),
         border: "1px solid purple",
         background: "transparent",
         borderRadius: "4px",
         "&:hover": {
         border: "1px solid green"
-        }
+        },
+        [theme.breakpoints.down(600)] : {
+            width: "14.7rem"
+            
+         },
     },
     textAreaForm: {
         marginTop: theme.spacing(1),
@@ -164,10 +176,20 @@ const useStyles = makeStyles((theme)=>({
         "&::placeholder": {
             fontSize: "1rem",
             fontFamily: "Roboto"
-        }
+        },
+        [theme.breakpoints.down(600)] : {
+            width: "16rem",
+            height: "15rem"
+            
+         },
     },
     divContainer: {
-        display: "flex"
+        display: "flex",
+        [theme.breakpoints.down(600)] : {
+            display: "block"
+            
+         },
+       
     }
 }));
 
@@ -207,7 +229,7 @@ export const NewPostForm = () => {
             textarea: values.textarea,
             age: values.age,
             creatorId: uid,
-            name: name,
+
             pic: photoUrl,
             date: Date.now(),
             userCredentials: {
@@ -221,10 +243,7 @@ export const NewPostForm = () => {
             await db.collection('posts').add(newPost)
            
             dispatch(loadingAction())
-            setTimeout(() => {
-                history.push('/animal-list')
-                dispatch(endLoading())
-            }, 99999); 
+            
 
         } catch (error) {
             console.log(error)
@@ -263,20 +282,20 @@ export const NewPostForm = () => {
             .email('Introduce un email válido')
             .required('Completa el campo con tu email'),
             cel: Yup.number()
-            .required('Completa este campo')
-
-          
+            .required('Completa este campo')        
         })}
-        onSubmit={(values, {setSubmitting}) => {
-               setSubmitting(true)
-               
-               console.log(values)
+        onSubmit={(values, actions ) => { 
                newPost(values)
+               setTimeout(() => {
+                dispatch(endLoading())
+                history.push('/animal-list')
+                actions.setSubmitting(false);
+            
+              }, 1000);
               
-               setSubmitting(false)
                
         }}>
-       {( {isValid, dirty})=>(
+       {( {isValid, dirty, isSubmitting})=>(
            <section className={classes.sectionRegister}>
            <div className={classes.register}>
                <div className={classes.registerContainer}>
@@ -313,8 +332,18 @@ export const NewPostForm = () => {
                    <Field as={TextField} type="text" name="name" classes={{root: classes.field}} label="Nombre del animal" variant="outlined" color="secondary" autoComplete="off" size="small"/>
                     <ErrorMessage name="name" component="small" className={classes.errorMessage} />
 
-                    <Field as={TextField} type="text" name="raza" classes={{root: classes.field}} label="Raza" variant="outlined" color="secondary" autoComplete="off" size="small"/>
-                    <ErrorMessage name="name" component="small" className={classes.errorMessage} />
+                    <label htmlFor="raza" className={classes.labelForm}>Raza</label>
+                    <Field name="raza" as="select" className={classes.fieldForm} id="raza">
+                        <option value="" disabled="disabled">--Seleccionar--</option>
+                        <option value="No tiene">No tiene</option>
+                        <option value="Rotweiller">Rotweiller</option>
+                        <option value="Pastor Aleman">Pastor Aleman</option>
+                        <option value="Chihuahua">Chihuahua</option>
+                        <option value="Golden Retriever">Golden Retriever</option>
+                        <option value="Beagle">Beagle</option>
+                        <option value="Otra">Otra</option>
+                    </Field>
+                    
 
                     <div className={classes.divContainer}>
                     <label htmlFor="number" className={classes.labelForm}>Edad</label>
@@ -343,14 +372,14 @@ export const NewPostForm = () => {
                     onChange={handleChange}/>
                     <ErrorMessage name="animalProfilePic" component="small" className={classes.errorMessage} />
 
-                    <Field as={TextareaAutosize} className={classes.textAreaForm} name="textarea" placeholder="Describe al animal" autoComplete="off" rowsMax={4}/>
+                    <Field as={TextField} classes={{root: classes.field}} name="textarea" placeholder="Describe al animal" autoComplete="off" />
                     <ErrorMessage name="textarea" component="small" className={classes.errorMessage} />
                    </>
                    }
                     <StyledBtn type="button" onClick={handleSetClick}>{click ? 'Volver' : 'Siguiente'}</StyledBtn>
                             <p className={classes.errorMessage}>{errorLogin}</p>
 
-                    {click &&  <StyledBtn type="submit" disabled={!(isValid && dirty)}>Subir</StyledBtn>}
+                    {click &&  <StyledBtn type="submit" disabled={!(isValid && dirty) || isSubmitting}>Subir</StyledBtn>}
                     <p className={classes.errorMessage}>{errorLogin}</p>
 
                    

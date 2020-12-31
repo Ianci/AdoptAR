@@ -1,9 +1,17 @@
 import { types } from '../types'
 
-export const postReducer = (state = {}, action) => {
+const initialState = {
+    posts: [],
+    post: null
+}
+export const postReducer = (state = initialState, action) => {
     const { type, payload } = action
     switch (type) {
-        
+        case types.getPosts:
+        return {
+            ...state,
+            posts: payload
+        }
         default:
             return state
     }

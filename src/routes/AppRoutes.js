@@ -9,7 +9,7 @@ import { Adoption } from '../components/sections/adoption/Adoption';
 import { RegisterSucesFull } from '../components/register/RegisterSucesFull'
 import { LoginSucesFull } from '../components/login/SuccesFullLogin'
 import { AnimalSection } from '../components/sections/animals/AnimalSection'
-import { NewPost } from '../components/sections/animals/NewPost'
+import { NewPostForm } from '../components/sections/animals/NewPostForm'
     
 //Material
 import { PublicRoute } from '../routes/PublicRoutes'
@@ -39,7 +39,7 @@ export const AppRoutes = () => {
             <Route path="/succesfull-register" component={RegisterSucesFull} />
             <Route path="/succesfull-login" component={LoginSucesFull} />
             <Route path="/animal-list" component={AnimalSection} />
-            <Route path="/new-post" isAuthenticated={isLogged} component={NewPost} />
+            <Route path="/new-post" isAuthenticated={isLogged} component={NewPostForm} />
         
             <Redirect to="/" />
 

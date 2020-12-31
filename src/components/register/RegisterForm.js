@@ -195,10 +195,7 @@ export const RegisterForm = () => {
        
             try {
                 await createUser(values.name, values.email, values.password)
-                setTimeout(() => {
-                    history.push('/succesfull-register')
-                  
-                }, 1000);
+                
             } catch (error) {
                 console.log(error.message)
                 dispatch(loginError(error.message))
@@ -229,15 +226,18 @@ export const RegisterForm = () => {
             .required('Vuelva a escribir la contraseña')
             .oneOf([Yup.ref('password'), null], 'Las contraseñas no coinciden')
         })}
-        onSubmit={(values, {setSubmitting}) => {
-               setSubmitting(true)
+        onSubmit={(values, actions) => {
                createAccount(values)
-             
                console.log(values.email);
-               setSubmitting(false)
+               setTimeout(() => {
+                
+                history.push('/succesfull-register')
+                actions.setSubmitting(false);
+            
+              }, 1000);
                
         }}>
-       {( {isValid, dirty})=>(
+       {( {isValid, dirty, isSubmitting})=>(
            <section className={classes.sectionRegister}>
            <div className={classes.register}>
                <div className={classes.registerContainer}>
@@ -257,7 +257,7 @@ export const RegisterForm = () => {
                                 <Field as={TextField} type="password"  classes={{root: classes.field}} name="confirm" label="Repita tu contraseña" variant="outlined" color="secondary" autoComplete="off"/>
                                 <ErrorMessage name="confirm" component="small" className={classes.errorMessage} />
 
-                                <StyledBtn type="submit" disabled={!(isValid && dirty)}>Crear cuenta</StyledBtn>
+                                <StyledBtn type="submit" disabled={!(isValid && dirty) || isSubmitting}>Crear cuenta</StyledBtn>
                                 <p className={classes.errorMessage}>{errorLogin}</p>
                         <Typography variant="h4" className={classes.connectLink}>Ya tenés cuenta? Conectate <Link to="/login" className={classes.loginLink}>acá</Link></Typography>
                         <BackButton onClick={() => history.push('/animal-list')}>Volver</BackButton>

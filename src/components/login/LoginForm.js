@@ -202,11 +202,6 @@ export const LoginForm = () => {
    const loginAccount = async (values) => {
         try {
             await loginUser(values.email, values.password)
-            setTimeout(() => {
-                history.push('/succesfull-login')
-              
-            }, 1000);
-            
           
         } catch (error) {
             console.log(error)
@@ -222,12 +217,17 @@ export const LoginForm = () => {
             password: Yup.string()
             .required('Por favor introduce tu contraseña')
         })}
-        onSubmit={(values, {setSubmitting}) => {
-                setSubmitting(true)
+        onSubmit={(values, actions) => {
+               
                 loginAccount(values)
-                setSubmitting(false)
+                setTimeout(() => {
+                   
+                    history.push('/succesfull-login')
+                    actions.setSubmitting(false);
+                
+                  }, 1000);
         }}>
-       {( {isValid, dirty})=>(
+       {( {isValid, dirty, isSubmitting})=>(
             <section className={classes.sectionRegister}>
             <div className={classes.register}>
                 <div className={classes.registerContainer}>
@@ -241,7 +241,7 @@ export const LoginForm = () => {
  
                                  <Field as={TextField} type="password" classes={{root: classes.field}} name="password" label="Introduce tu contraseña" variant="outlined" color="secondary" autoComplete="off" size="small"/>
                                  <ErrorMessage name="password" component="small" className={classes.errorMessage} />
-                                 <StyledBtn type="submit" disabled={!(isValid && dirty)}>Entrar</StyledBtn>
+                                 <StyledBtn type="submit" disabled={!(isValid && dirty) || isSubmitting}>Entrar</StyledBtn>
                                  <p className={classes.errorMessage}>{errorLogin}</p>
                                  <div className={classes.authContainer}>
                                         <Typography className={classes.register_h1}>Login with:</Typography>
