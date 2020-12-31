@@ -222,21 +222,21 @@ export const NewPostForm = () => {
     const newPost = async ( values ) => {
         if(!uid) history.push('/')
         const newPost = {
-            name: values.name,
+            animalName: values.animalName,
             raza: values.raza,
             size: values.size,
             sexo: values.sexo,
             textarea: values.textarea,
             age: values.age,
             creatorId: uid,
-
             pic: photoUrl,
             date: Date.now(),
             userCredentials: {
                 name: values.name,
                 city: values.city,
                 cel: values.cel,
-                email: values.email
+                email: values.email,
+                provincia: values.provincia
             }
         }
         try {
@@ -254,9 +254,9 @@ export const NewPostForm = () => {
    
     
     return (
-        <Formik initialValues={{name: "", raza: "", size: "", sexo: "", textarea: '', age: "", animalProfilePic: undefined, name: "", city: "", cel: "", email: ""}}
+        <Formik initialValues={{animalName: "", raza: "", size: "", sexo: "", textarea: '', age: "", animalProfilePic: undefined, name: "", city: "", cel: "", email: "", provincia: ""}}
         validationSchema = {Yup.object({
-            name: Yup.string()
+            animalName: Yup.string()
             .required('Completa este campo')
             .max(15, 'Tu nombre debe contener 15 caracteres máximo'),
             raza: Yup.string()
@@ -282,7 +282,9 @@ export const NewPostForm = () => {
             .email('Introduce un email válido')
             .required('Completa el campo con tu email'),
             cel: Yup.number()
-            .required('Completa este campo')        
+            .required('Completa este campo'),
+            provincia: Yup.string()
+            .required('Completa este campo')      
         })}
         onSubmit={(values, actions ) => { 
                newPost(values)
@@ -325,12 +327,37 @@ export const NewPostForm = () => {
                         <Field as={TextField} type="text" name="city" classes={{root: classes.field}} label="Ciudad" variant="outlined" color="secondary" autoComplete="off" size="small"/>
                         <ErrorMessage name="city" component="small" className={classes.errorMessage} />
 
-                      
+                        <label htmlFor="provincia" className={classes.labelForm}>Provincia</label>
+                        <Field name="provincia" as="select" className={classes.fieldForm} id="provincia">
+                        <option value="" disabled="disabled">--Seleccionar--</option>
+                        <option value="Buenos Aires">Buenos Aires</option>
+                        <option value="Catamarca">Catamarca</option>
+                        <option value="Chaco">Chaco</option>
+                        <option value="Chubut">Chubut</option>
+                        <option value="Córdoba">Córdoba</option>
+                        <option value="Corrientes">Corrientes</option>
+                        <option value="Entre Ríos">Entre Ríos</option>
+                        <option value="Jujuy">Jujuy</option>
+                        <option value="La Pampa">La Pampa</option>
+                        <option value="La Rioja">La Rioja</option>
+                        <option value="Mendoza">Mendoza</option>
+                        <option value="Misiones">Misiones</option>
+                        <option value="Neuquén">Neuquén</option>
+                        <option value="Río Negro">Río Negro</option>
+                        <option value="Salta">Salta</option>
+                        <option value="San Luis">San Luis</option>
+                        <option value="San Juan">San Juan</option>
+                        <option value="Santa Cruz">Santa Cruz</option>
+                        <option value="Santiago del Estero">Santiago del Estero</option>
+                        <option value="Santa Fe">Santa Fe</option>
+                        <option value="Tucumán">Tucumán</option>
+                        <option value="Tierra del Fuego, Antártida e Isla del Atlántico Sur">Tierra del Fuego, Antártida e Isla del Atlántico Sur</option>
+                        </Field>
                     </>
                    :
                    <>
-                   <Field as={TextField} type="text" name="name" classes={{root: classes.field}} label="Nombre del animal" variant="outlined" color="secondary" autoComplete="off" size="small"/>
-                    <ErrorMessage name="name" component="small" className={classes.errorMessage} />
+                   <Field as={TextField} type="text" name="animalName" classes={{root: classes.field}} label="Nombre del animal" variant="outlined" color="secondary" autoComplete="off" size="small"/>
+                    <ErrorMessage name="animalName" component="small" className={classes.errorMessage} />
 
                     <label htmlFor="raza" className={classes.labelForm}>Raza</label>
                     <Field name="raza" as="select" className={classes.fieldForm} id="raza">
@@ -365,7 +392,6 @@ export const NewPostForm = () => {
                         <option value="" disabled="disabled">--Seleccionar--</option>
                         <option value="Hembra">Hembra</option>
                         <option value="Macho">Macho</option>
-                        
                     </Field>
 
                     <Field as={TextField} type="file" name="animalProfilePic" classes={{root: classes.field}} label="Foto del animal" variant="outlined" color="secondary" autoComplete="off" size="small"

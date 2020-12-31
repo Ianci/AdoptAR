@@ -4,7 +4,11 @@ import { useSelector } from 'react-redux'
 import { AnimalPost } from './AnimalPost'
 
 const useStyles = makeStyles(theme =>({
-
+    posts_container: {
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr 1fr",
+        position: "relative"
+    }
 }))
 
 export const AnimaList = () => {

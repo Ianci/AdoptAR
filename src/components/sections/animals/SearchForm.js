@@ -52,6 +52,8 @@ const useStyles = makeStyles(theme => ({
     h2_adoption: {
         ...theme.typography.tab,
         display: "inline",
+        color: "white",
+        transition: "all .1s ease-out",
         "&:hover":{
             borderBottom: "5px solid yellow"
         }
