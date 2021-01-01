@@ -13,10 +13,15 @@ export const AdoptionDetails = () => {
     useEffect(() => {
         if(query){
             const getPost = async () => {
-                const post = await db.collection('posts').doc(query).get()
-                if(post.exists){
-                dispatch(getPostActive(post.data()))
+                try {
+                    const post = await db.collection('posts').doc(query).get()
+                    if(post.exists){
+                            dispatch(getPostActive(post.data()))
+                    }    
+                } catch (error) {
+                    console.log(error.message) 
                 }
+                
             }
             getPost()
         }

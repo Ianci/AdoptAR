@@ -7,7 +7,13 @@ const useStyles = makeStyles(theme =>({
     posts_container: {
         display: "grid",
         gridTemplateColumns: "1fr 1fr 1fr",
-        position: "relative"
+        position: "relative",
+        [theme.breakpoints.down(600)] : {
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column"
+            
+         },
     }
 }))
 
