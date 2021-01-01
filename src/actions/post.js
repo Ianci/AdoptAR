@@ -14,3 +14,4 @@ export const getPostActive = (post) => {
         payload: post
     }
 }
+
