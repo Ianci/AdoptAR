@@ -6,6 +6,7 @@ import { ThemeProvider } from "@material-ui/core";
 import { theme } from './styles/Theme';
 import { useAuth } from './hooks/useAuth'
 import '../src/fonts/fonts.css'
+
 function App() {
   const user = useAuth()
   console.log(user)

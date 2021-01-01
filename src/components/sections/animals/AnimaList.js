@@ -2,7 +2,11 @@ import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 import { useSelector } from 'react-redux'
 import { AnimalPost } from './AnimalPost'
-
+import {
+    CSSTransition,
+    TransitionGroup,
+  } from 'react-transition-group';
+import '../../../index.css'
 const useStyles = makeStyles(theme =>({
     posts_container: {
         display: "grid",
@@ -22,13 +26,21 @@ export const AnimaList = () => {
     const { posts} = useSelector(state => state.post)
     console.log(posts)
     return (
+        <TransitionGroup>
         <div className={classes.posts_container}>
             {posts.map(post =>(
+                  <CSSTransition
+                  key={post.id}
+                  timeout={300}
+                  classNames="item"
+                   >
                 <AnimalPost 
                 key={post.id}
                 post={post}
                 />
+                 </CSSTransition>
             ))}
         </div>
+        </TransitionGroup>
     )
 }
