@@ -258,7 +258,7 @@ export const NewPostForm = () => {
         validationSchema = {Yup.object({
             animalName: Yup.string()
             .required('Completa este campo')
-            .max(15, 'Tu nombre debe contener 15 caracteres máximo'),
+            .max(12, 'Tu nombre debe contener 12 caracteres máximo'),
             raza: Yup.string()
             .required('Completa este campo')
             .max(30, '30 caracteres máximo'),

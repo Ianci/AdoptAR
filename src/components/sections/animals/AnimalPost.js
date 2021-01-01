@@ -2,7 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 import { BackButton } from '../../../styles/Buttons'
 import { Typography } from '@material-ui/core'
-
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles(theme =>({
     post_container: {
@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme =>({
         borderRadius: "50%",
         boxShadow: "0px 12px 20px rgba(0,0,0,0.5)",
         transition: "all .3s ease-out",
+        objectFit: "cover",
         "&:hover": {
             transform: "scale(1.08)"
         }
@@ -35,12 +36,17 @@ const useStyles = makeStyles(theme =>({
 }))
 export const AnimalPost = ({post}) => {
     const classes = useStyles()
-    console.log(post)
+    const history = useHistory()
+
+    
+    const getActivePost = (id) => {
+        history.push(`/adoption/${id}`)
+    }
     return (
         <div className={classes.post_container}>
-            <img src={post.pic} width="250" height="200" alt="" className={classes.pic}/>
+        <img src={post.pic} width="250" height="200" alt="" className={classes.pic}/>
             <Typography variant="h4" className={classes.animalName}>{post.animalName}</Typography>
-            <BackButton type="button" className={classes.btnAnimal}>Ver</BackButton>
+            <BackButton type="button" className={classes.btnAnimal} onClick={() => getActivePost(post.id)}>Ver</BackButton>
         </div>
     )
 }

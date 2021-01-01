@@ -10,13 +10,14 @@ import { RegisterSucesFull } from '../components/register/RegisterSucesFull'
 import { LoginSucesFull } from '../components/login/SuccesFullLogin'
 import { AnimalSection } from '../components/sections/animals/AnimalSection'
 import { NewPostForm } from '../components/sections/animals/NewPostForm'
-    
+
 //Material
 import { PublicRoute } from '../routes/PublicRoutes'
 import { PrivateRoute } from '../routes/PrivateRoutes'
 import { ContainerHome } from '../styles/components/home/home'
 //Redux
 import { useDispatch, useSelector } from 'react-redux'
+import { AdoptionDetails } from '../components/sections/animals/AdoptionDetails';
 
 
 
@@ -39,8 +40,8 @@ export const AppRoutes = () => {
             <Route path="/succesfull-register" component={RegisterSucesFull} />
             <Route path="/succesfull-login" component={LoginSucesFull} />
             <Route path="/animal-list" component={AnimalSection} />
-            <Route path="/new-post" isAuthenticated={isLogged} component={NewPostForm} />
-        
+            <Route exact path="/adoption/:id" component={AdoptionDetails} />
+            <PrivateRoute path="/new-post" isAuthenticated={isLogged} component={NewPostForm} />
             <Redirect to="/" />
 
             </Switch>

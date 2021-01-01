@@ -6,3 +6,11 @@ export const getPostsFromDb = (posts) => {
         payload: posts
     }
 }
+
+
+export const getPostActive = (post) => {
+    return{
+        type: types.getActivePost,
+        payload: post
+    }
+}

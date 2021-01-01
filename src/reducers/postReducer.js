@@ -12,6 +12,11 @@ export const postReducer = (state = initialState, action) => {
             ...state,
             posts: payload
         }
+        case types.getActivePost: 
+        return {
+            ...state,
+            post: payload
+        }
         default:
             return state
     }
