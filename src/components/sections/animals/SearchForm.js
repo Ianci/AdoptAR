@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     },
     sideBar: {
         width: "320px",
-      
+        position: "relative"
     },
     main: {
         flex: "0 0 75%",
@@ -47,6 +47,16 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down(600)] : {
             height: "1rem",
             width: "15rem",
+            position: "absolute",
+            left: "32px",
+            top: "5px"
+         },
+         [theme.breakpoints.up(600)] : {
+            height: "2rem",
+            width: "15rem",
+            position: "absolute",
+            left: "82px",
+            top: "5px"
          }
     },
     h2_adoption: {
@@ -54,9 +64,21 @@ const useStyles = makeStyles(theme => ({
         display: "inline",
         color: "white",
         transition: "all .1s ease-out",
-        "&:hover":{
-            borderBottom: "5px solid yellow"
-        }
+        [theme.breakpoints.down(600)] : {
+            height: "1rem",
+            width: "15rem",
+            position: "absolute",
+            left: "32px",
+            top: "5px"
+         },
+         [theme.breakpoints.up(600)] : {
+            height: "2rem",
+            width: "15rem",
+            position: "absolute",
+            left: "82px",
+            top: "5px"
+         }
+       
     },
     
 }))
@@ -79,11 +101,12 @@ export const SearchForm = () => {
        {( {isValid, dirty})=>(    
         <div className={classes.searchFormContainer}>
             <div className={classes.sideBar}>
+            <Typography variant="h2" className={classes.h2_adoption}>Adopción</Typography>
             <Field name="name" type="text" className={classes.inputSearch} placeholder="Filtrar por raza, ciudad, tamaño" autoComplete="off"/>
-            <h1>Hi</h1>
+           
             </div>
             <div className={classes.main}>
-                <Typography variant="h2" className={classes.h2_adoption}>Adopción</Typography>
+               
                 <AnimaList />
             </div>
         </div>

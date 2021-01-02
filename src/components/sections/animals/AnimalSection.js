@@ -106,8 +106,7 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         justifyContent: "center",
         alignContent: "center"
-    }
-   
+    },
 }))
 
 export const AnimalSection = () => {

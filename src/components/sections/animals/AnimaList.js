@@ -9,13 +9,27 @@ import {
 import '../../../index.css'
 const useStyles = makeStyles(theme =>({
     posts_container: {
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr 1fr",
-        position: "relative",
+       
         [theme.breakpoints.down(600)] : {
             display: "flex",
             justifyContent: "center",
-            flexDirection: "column"
+            flexDirection: "column",
+            marginRight: "2rem",
+            marginTop: "4rem"
+            
+         },
+         [theme.breakpoints.up('sm')] : {
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            position: "relative",
+            marginRight: "2rem",
+            marginTop: "4rem"
+            
+         },
+         [theme.breakpoints.up('md')] : {
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr 1fr",
+            position: "relative",
             
          },
     }

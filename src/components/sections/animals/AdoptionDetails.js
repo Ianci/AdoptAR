@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/styles'
 import { StyledBtn } from '../../../styles/Buttons'
 import { RiArrowDownCircleFill } from 'react-icons/ri'
 import { Spinner } from '../../spinner/Spinner'
+
 const useStyles = makeStyles(theme => ({
     information_h2: {
         ...theme.typography.tab,

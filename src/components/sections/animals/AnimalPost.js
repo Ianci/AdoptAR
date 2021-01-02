@@ -10,19 +10,47 @@ const useStyles = makeStyles(theme =>({
      height: "20rem",
      position: "relative",
      marginTop: theme.spacing(1),
+     [theme.breakpoints.down(500)] : {
+          
+        height: "18rem"
+     },
     },
     animalName: {
         ...theme.typography.tab,
         position: "absolute",
         color: "white",
         textShadow: "0px 12px 10px rgba(0,0,0,0.5)",
-        left: "6.5rem"
+        left: "6.5rem",
+        [theme.breakpoints.down(400)] : {
+            left: "4.5rem",
+           },
+           [theme.breakpoints.up(400)] : {
+            left: "6.5rem",
+           },
+           [theme.breakpoints.up('md')] : {
+            left: "6.5rem",
+           },
+         
     },
     pic: {
         borderRadius: "50%",
         boxShadow: "0px 12px 20px rgba(0,0,0,0.5)",
         transition: "all .3s ease-out",
         objectFit: "cover",
+        [theme.breakpoints.down(400)] : {
+          width: "200px",
+          height: "155px"
+            
+         },
+         [theme.breakpoints.up(500)] : {
+          
+            width: "220px",
+            height: "200px"
+         },
+         [theme.breakpoints.up('md')] : {
+          
+            
+         },
         "&:hover": {
             transform: "scale(1.08)"
         }
@@ -31,7 +59,23 @@ const useStyles = makeStyles(theme =>({
         position: "absolute",
         top: "15rem",
         right: "9.3rem",
-        margin: 0
+        margin: 0,
+        [theme.breakpoints.down(500)] : {
+            top: "13rem",
+            right: "4.3rem",
+           },
+           [theme.breakpoints.up(500)] : {
+            top: "15rem",
+            right: "3rem",
+           },
+           [theme.breakpoints.up('md')] : {
+            top: "15rem",
+            right: "4.3rem",
+           },
+           [theme.breakpoints.up('lg')] : {
+            top: "15rem",
+            right: "9.3rem",
+           },
     }
 }))
 export const AnimalPost = ({post}) => {
