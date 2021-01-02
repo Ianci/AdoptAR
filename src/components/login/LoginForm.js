@@ -12,6 +12,7 @@ import { loginUser } from '../../firebase/config'
 import { loginError } from '../../actions/auth'
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../../hooks/useAuth'
+import { loginWithGoogle } from '../../actions/auth'
 const useStyles = makeStyles((theme)=>({
     sectionRegister: {
         position: "relative",
@@ -208,6 +209,11 @@ export const LoginForm = () => {
             dispatch(loginError(error.message))
         }
    }
+
+   const googleLogin = () => {
+        dispatch(loginWithGoogle())
+   }
+
     return (
         <Formik initialValues={{email: "", password: ""}}
         validationSchema = {Yup.object({
@@ -246,16 +252,14 @@ export const LoginForm = () => {
                                  <div className={classes.authContainer}>
                                         <Typography className={classes.register_h1}>Login with:</Typography>
 
-                                    <div className={classes.googleBtn}>
+                                    <div className={classes.googleBtn} onClick={googleLogin}>
                                         <div className={classes.google_wrapper}>
                                             <img className={classes.googleIcon} src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
                                         </div>
                                         <p className={classes.googleBtnText}><b>Sign in with google</b></p>
                                         </div>
                                     </div>
-                                    <div className={classes.btnFace}>
-                                        <button type="button" className={classes.btnFacebook}>Continue with Facebook</button>
-                                    </div>
+                                 
                                     <div className={classes.linkContainer}>
                                     <Link to="/register" className={classes.link_newAccount}> Create new account</Link>
                                     <BackButton onClick={() => history.push('/')}>Volver</BackButton>

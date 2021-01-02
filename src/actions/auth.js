@@ -1,5 +1,5 @@
 import { types } from "../types"
-import { firebase } from '../firebase/config'
+import { firebase, googleAuthProvider } from '../firebase/config'
 
 //Action Login
 export const login = (uid, displayName) => {
@@ -36,10 +36,11 @@ export const startLogOut = () =>{
 
 
 export const loginWithGoogle = () => {
-
-}
-export const loginWithFacebook = () => {
-    return(dispatch)=> {
-
+    return  (dispatch) => {
+        firebase.auth().signInWithPopup(googleAuthProvider)
+        .then( ({user}) => {
+            dispatch(login(user.uid, user.displayName)
+            )
+        })
     }
 }
