@@ -270,7 +270,8 @@ export const NewPostForm = () => {
             sexo: Yup.string()
             .required('Required'),
             textarea: Yup.string()
-            .required('Required'),
+            .required('Required')
+            .max(250, '250 caracteres máximo'),
             animalProfilePic: Yup.mixed(),
             name: Yup.string()
             .required('Completa este campo')

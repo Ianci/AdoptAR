@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
         flexDirection: "column",
         padding: theme.spacing(1),
         background: "#EDF4ED",
-        height: "100vh",
+        minheight: "100vh",
         boxShadow: "0px 5px 20px rgba(0,0,0,0.6)"
     },
     spanContent: {
@@ -53,6 +53,7 @@ const useStyles = makeStyles(theme => ({
     },
     image: {
         maxWidth: "100%",
+        maxHeight: "500px",
         objectFit: "cover",
         borderRadius: "3rem",
         transition: "all .3s ease-out",
@@ -100,7 +101,7 @@ export const AdoptionDetails = () => {
             <Typography variant="h2" className={classes.information_h2}>Sexo: <span className={classes.spanContent}>{post.sexo}</span></Typography>
             <Typography variant="h2" className={classes.information_h2}>Tamaño: <span className={classes.spanContent}>{post.size}</span></Typography>
             <img src={post.pic} alt="adoption" className={classes.image}/>
-            <Typography variant="h2" className={classes.information_textarea}>"{post.textarea}". <span className={classes.spanContent}>-{post.userCredentials.name}</span></Typography>
+            <Typography variant="h3" className={classes.information_textarea}>"{post.textarea}". <span className={classes.spanContent}>-{post.userCredentials.name}</span></Typography>
             
             <div className="" onClick={handleClick}>
                 <Typography variant="h2" className={classes.information_h3}>Ver datos de contacto <RiArrowDownCircleFill /></Typography> 
