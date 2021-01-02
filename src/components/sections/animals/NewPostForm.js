@@ -3,7 +3,7 @@ import { makeStyles} from '@material-ui/core/styles';
 import { TextField, Typography, } from '@material-ui/core'
 import { Formik, Form, ErrorMessage, Field} from 'formik'
 import * as Yup from 'yup';
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import imgForm from '../../../images/cace.jpg'
 import {  purple } from '@material-ui/core/colors';
 import { StyledBtn } from '../../../styles/Buttons'
@@ -198,9 +198,9 @@ export const NewPostForm = () => {
     const classes = useStyles()
     const history = useHistory()
     const dispatch = useDispatch()
-    const { errorLogin, user:{uid, name} } = useSelector(state => state.auth)
+    const { errorLogin, user:{uid} } = useSelector(state => state.auth)
     
-    const { error, loading } = useSelector(state => state.ui)
+    
     const [ click, setClick ] = useState(false)
     //Upload image to Storage
     const [ photoUrl , setPhotoUrl] = useState(null)

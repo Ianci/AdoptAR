@@ -2,14 +2,10 @@ import React from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import adoptr from '../../images/adoptr.png'
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import {  Link, useHistory } from 'react-router-dom'
-import { Tabs, Button, useMediaQuery, Typography} from '@material-ui/core'
-import { AiOutlineUserAdd } from 'react-icons/ai';
-import { SideBar } from './Sidebar'
+import { Tabs, Button, Typography} from '@material-ui/core'
 
-
-import { useDispatch } from 'react-redux'
 import { StyledBtn } from '../../styles/Buttons';
 
 const useStyles = makeStyles(theme => ({
@@ -118,9 +114,9 @@ const useStyles = makeStyles(theme => ({
 
 export const NavBar = () => {
     const classes = useStyles()
-    const theme = useTheme()
+ 
     const history = useHistory()
-    const matches = useMediaQuery(theme.breakpoints.down("xs"))
+ 
    
    
     

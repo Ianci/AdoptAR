@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles} from '@material-ui/core/styles';
 import { TextField, Typography} from '@material-ui/core'
 import { Formik, Form, ErrorMessage, Field} from 'formik'
@@ -9,7 +9,7 @@ import { StyledBtn } from '../../styles/Buttons'
 import {  purple, green } from '@material-ui/core/colors';
 import { BackButton } from '../../styles/Buttons'
 import { loginUser } from '../../firebase/config'
-import { loginError, login } from '../../actions/auth'
+import { loginError } from '../../actions/auth'
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../../hooks/useAuth'
 const useStyles = makeStyles((theme)=>({

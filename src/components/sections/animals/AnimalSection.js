@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { Container, Typography, TextField, useMediaQuery } from '@material-ui/core'
-import { makeStyles, useTheme } from '@material-ui/styles'
+import React, { useEffect } from 'react'
+import { Container, Typography, } from '@material-ui/core'
+import { makeStyles } from '@material-ui/styles'
 import adoptr from '../../../images/adoptr.png'
 import { Link, useHistory } from 'react-router-dom';
 import { StyledBtn } from '../../../styles/Buttons';
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogOut } from '../../../actions/auth';
-import { db, firebase } from '../../../firebase/config';
+import { db } from '../../../firebase/config';
 import { LogoutBtn, LoginOptions } from './uiButtons';
 import { SearchForm } from './SearchForm'
 import { getPostsFromDb } from '../../../actions/post'
@@ -116,8 +116,8 @@ export const AnimalSection = () => {
     const dispatch = useDispatch()
     const reduxState = useSelector(state => state.auth)
     const { isLogged } = reduxState
-    const theme = useTheme()
-    const matches = useMediaQuery(theme.breakpoints.down(600))
+
+    
 
     //Get posts 
     useEffect(() => {

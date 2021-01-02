@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme =>({
 export const AnimaList = () => {
     const classes = useStyles()
     const { posts} = useSelector(state => state.post)
-    console.log(posts)
+    
     return (
         <TransitionGroup>
         <div className={classes.posts_container}>

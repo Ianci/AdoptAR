@@ -3,7 +3,7 @@ import { NavBar } from './NavBar'
 import  section2  from '../../images/section2.svg'
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import { BackButton, StyledBtn } from '../../styles/Buttons';
+import { StyledBtn } from '../../styles/Buttons';
 import { useHistory } from 'react-router-dom'
 
 

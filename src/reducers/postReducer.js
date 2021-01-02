@@ -2,7 +2,8 @@ import { types } from '../types'
 
 const initialState = {
     posts: [],
-    post: null
+    post: null,
+ 
 }
 export const postReducer = (state = initialState, action) => {
     const { type, payload } = action

@@ -1,10 +1,10 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles} from '@material-ui/core/styles';
 import { Typography} from '@material-ui/core'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import imgForm from '../../images/adoptar1.jpg'
-import {  purple } from '@material-ui/core/colors';
+
 import { StyledBtn } from '../../styles/Buttons'
 import { useDispatch } from 'react-redux'
 import { login } from '../../actions/auth'

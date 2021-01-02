@@ -9,7 +9,7 @@ import '../src/fonts/fonts.css'
 
 function App() {
   const user = useAuth()
-  console.log(user)
+
   
   return (
     <ThemeProvider theme={theme} >

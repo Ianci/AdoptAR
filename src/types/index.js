@@ -14,6 +14,7 @@ export const types = {
     getPosts: '[POST] GET_POST',
     getActivePost: '[POST] GET_POST_ACTIVE',
     cleanerPost: '[POST] CLEANER_POST',
+    filterPost: '[POST] FILTER_POST',
 
     deletePost: '[POST] DELETE_POST'
 }

@@ -16,7 +16,7 @@ import { PublicRoute } from '../routes/PublicRoutes'
 import { PrivateRoute } from '../routes/PrivateRoutes'
 import { ContainerHome } from '../styles/components/home/home'
 //Redux
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { AdoptionDetails } from '../components/sections/animals/AdoptionDetails';
 
 
@@ -24,7 +24,7 @@ import { AdoptionDetails } from '../components/sections/animals/AdoptionDetails'
 export const AppRoutes = () => {
     const state = useSelector(state => state.auth)
     const { isLogged } = state
-    console.log(isLogged)    
+   
     return (
         
        

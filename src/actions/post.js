@@ -15,3 +15,9 @@ export const getPostActive = (post) => {
     }
 }
 
+export const filterPost = (posts) => {
+    return{
+        type: types.filterPost,
+        payload: posts
+    }
+}
