@@ -4,10 +4,12 @@ import { Container, Typography } from '@material-ui/core'
 import { ShowResults } from './ShowResults'
 import { db } from '../../../firebase/config'
 import { getPostActive } from '../../../actions/post'
+import { loadingAction, endLoading } from '../../../actions/ui'
 import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/styles'
 import { StyledBtn } from '../../../styles/Buttons'
 import { RiArrowDownCircleFill } from 'react-icons/ri'
+import { Spinner } from '../../spinner/Spinner'
 const useStyles = makeStyles(theme => ({
     information_h2: {
         ...theme.typography.tab,
@@ -71,19 +73,23 @@ export const AdoptionDetails = () => {
     const query = history.location.pathname.substring(10)
     const [ click, setClick ] = useState(false)
     const dispatch = useDispatch()
+    //Redux states
     const { post } = useSelector(state => state.post)
- 
+    const { loading } = useSelector(state => state.ui)
+
     const handleClick = () => {
         setClick(!click)
     }
     useEffect(() => {
         if(query){
+            dispatch(loadingAction())
             const getPost = async () => {
                 try {
                     const post = await db.collection('posts').doc(query).get()
                     if(post.exists){    
                             dispatch(getPostActive(post.data()))
                     }    
+                    dispatch(endLoading())
                 } catch (error) {
                     console.log(error.message) 
                 }
@@ -92,7 +98,9 @@ export const AdoptionDetails = () => {
         }
     }, [query, dispatch])
 
-    
+    if(loading){
+        return <Spinner/>
+    }
 
     return (
         <Container maxWidth="md" className={classes.detailsContainer}>
