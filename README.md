@@ -1,10 +1,10 @@
 
 
-#Aplicación para "adoptar" animales o subir un animal para darlo en adopción responsable
+# Aplicación para "adoptar" animales o subir un animal para darlo en adopción responsable
 
 ##
 
-**Features**
+**Features** <br />
 El inicio de la página es una introducción a "AdoptAR", una asociación sin fines de lucro ficticia que busca generar un puente entre un animal que busca una familia, y una familia o individuo que desea adoptar.
 
 
