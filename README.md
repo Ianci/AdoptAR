@@ -13,7 +13,7 @@ Al crearse la cuenta, o loguearse con su cuenta de Google, se desplegará un but
 
 Luego de rellenar un pequeño formulario con los datos del animal, y luego con los datos de contacto, al finalizar se recargá la página dónde aparece la lista de animales y ya aparecerá el nuevo posteo realizado.
 
-####Packages
+## Packages
 
 *La App fue hecha con*
 
