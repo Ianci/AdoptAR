@@ -1,6 +1,6 @@
 
 
-##Aplicación para "adoptar" animales o subir un animal para darlo en adopción responsable
+#Aplicación para "adoptar" animales o subir un animal para darlo en adopción responsable
 
 ##
 
