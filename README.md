@@ -17,12 +17,12 @@ Luego de rellenar un pequeño formulario con los datos del animal, y luego con l
 
 *La App fue hecha con*
 
-React
-MaterialUI
-Firebase
-Formik & Yup para formularios y validaciones
-Redux para manejo de estado de la App
-Redux Persistor para mantener el estado
+React <br />
+MaterialUI <br />
+Firebase <br />
+Formik & Yup para formularios y validaciones <br />
+Redux para manejo de estado de la App <br />
+Redux Persistor para mantener el estado <br />
 
 
 
