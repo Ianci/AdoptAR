@@ -203,7 +203,9 @@ export const LoginForm = () => {
    const loginAccount = async (values) => {
         try {
             await loginUser(values.email, values.password)
-          
+            if(user){
+                history.push('/succesfull-login')
+            }
         } catch (error) {
             console.log(error)
             dispatch(loginError(error.message))
@@ -228,7 +230,7 @@ export const LoginForm = () => {
                 loginAccount(values)
                 setTimeout(() => {
                    
-                    history.push('/succesfull-login')
+                   
                     actions.setSubmitting(false);
                 
                   }, 1000);
