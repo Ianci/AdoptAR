@@ -76,6 +76,7 @@ export const AdoptionDetails = () => {
     const dispatch = useDispatch()
     //Redux states
     const { post } = useSelector(state => state.post)
+    console.log(post)
     const { loading } = useSelector(state => state.ui)
 
     const handleClick = () => {
@@ -105,6 +106,9 @@ export const AdoptionDetails = () => {
 
     return (
         <Container maxWidth="md" className={classes.detailsContainer}>
+            {loading ? <Spinner />
+            :
+            <>
             <Typography variant="h1" className={classes.information_h1}>Nombre: <span className={classes.spanContent}>{post.animalName}</span></Typography>
             <Typography variant="h2" className={classes.information_h2}>Raza: <span className={classes.spanContent}>{post.raza}</span></Typography>
             <Typography variant="h2" className={classes.information_h2}>Sexo: <span className={classes.spanContent}>{post.sexo}</span></Typography>
@@ -116,6 +120,8 @@ export const AdoptionDetails = () => {
                 <Typography variant="h2" className={classes.information_h3}>Ver datos de contacto <RiArrowDownCircleFill /></Typography> 
                 {click ? <ShowResults />: null}
             </div>
+            </>
+            }
             <StyledBtn onClick={() => history.push('/animal-list')}>Volver</StyledBtn>
         </Container>
     )
