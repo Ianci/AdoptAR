@@ -9,7 +9,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/styles'
 import { StyledBtn } from '../../../styles/Buttons'
 import { RiArrowDownCircleFill } from 'react-icons/ri'
-import { Spinner } from '../../spinner/Spinner'
+
+import { IndividualPost } from './IndividualPost'
+
 
 const useStyles = makeStyles(theme => ({
     information_h2: {
@@ -79,6 +81,7 @@ export const AdoptionDetails = () => {
     console.log(post)
     const { loading } = useSelector(state => state.ui)
 
+    
     const handleClick = () => {
         setClick(!click)
     }
@@ -100,29 +103,19 @@ export const AdoptionDetails = () => {
         }
     }, [query, dispatch])
 
-    if(loading){
-        return <Spinner/>
-    }
+    
 
     return (
         <Container maxWidth="md" className={classes.detailsContainer}>
-            {loading ? <Spinner />
-            :
-            <>
-            <Typography variant="h1" className={classes.information_h1}>Nombre: <span className={classes.spanContent}>{post.animalName}</span></Typography>
-            <Typography variant="h2" className={classes.information_h2}>Raza: <span className={classes.spanContent}>{post.raza}</span></Typography>
-            <Typography variant="h2" className={classes.information_h2}>Sexo: <span className={classes.spanContent}>{post.sexo}</span></Typography>
-            <Typography variant="h2" className={classes.information_h2}>Tamaño: <span className={classes.spanContent}>{post.size}</span></Typography>
-            <img src={post.pic} alt="adoption" className={classes.image}/>
-            <Typography variant="h3" className={classes.information_textarea}>"{post.textarea}". <span className={classes.spanContent}>-{post.userCredentials.name}</span></Typography>
-            
-            <div className="" onClick={handleClick}>
-                <Typography variant="h2" className={classes.information_h3}>Ver datos de contacto <RiArrowDownCircleFill /></Typography> 
-                {click ? <ShowResults />: null}
-            </div>
-            </>
-            }
-            <StyledBtn onClick={() => history.push('/animal-list')}>Volver</StyledBtn>
-        </Container>
+
+        <IndividualPost post={post} />
+
+        <div className="" onClick={handleClick}>
+            <Typography variant="h2" className={classes.information_h3}>Ver datos de contacto <RiArrowDownCircleFill /></Typography> 
+            {click ? <ShowResults />: null}
+        </div>
+        <StyledBtn onClick={() => history.push('/animal-list')}>Volver</StyledBtn>
+        </Container> 
+
     )
 }
