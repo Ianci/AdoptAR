@@ -73,43 +73,28 @@ const useStyles = makeStyles(theme => ({
 export const AdoptionDetails = () => {
     const history = useHistory()
     const classes = useStyles()
-    const query = history.location.pathname.substring(10)
+
     const [ click, setClick ] = useState(false)
-    const dispatch = useDispatch()
+  
+   
     //Redux states
     const { post } = useSelector(state => state.post)
     console.log(post)
-    const { loading } = useSelector(state => state.ui)
+  
 
-    
     const handleClick = () => {
         setClick(!click)
     }
-    useEffect(() => {
-        if(query){
-            dispatch(loadingAction())
-            const getPost = async () => {
-                try {
-                    const post = await db.collection('posts').doc(query).get()
-                    if(post.exists){    
-                            dispatch(getPostActive(post.data()))
-                    }    
-                    dispatch(endLoading())
-                } catch (error) {
-                    console.log(error.message) 
-                }
-            }
-            getPost()
-        }
-    }, [query, dispatch])
+
+    
 
     
 
     return (
         <Container maxWidth="md" className={classes.detailsContainer}>
-
+        
         <IndividualPost post={post} />
-
+        
         <div className="" onClick={handleClick}>
             <Typography variant="h2" className={classes.information_h3}>Ver datos de contacto <RiArrowDownCircleFill /></Typography> 
             {click ? <ShowResults />: null}

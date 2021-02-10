@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState} from 'react'
 import { makeStyles } from '@material-ui/styles'
 import { BackButton } from '../../../styles/Buttons'
 import { Typography } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
+import { db } from '../../../firebase/config';
+import { useDispatch } from 'react-redux'
+import { getPostActive } from '../../../actions/post'
+import { loadingAction, endLoading } from '../../../actions/ui'
 
 const useStyles = makeStyles(theme =>({
     post_container: {
@@ -81,16 +85,33 @@ const useStyles = makeStyles(theme =>({
 export const AnimalPost = ({post}) => {
     const classes = useStyles()
     const history = useHistory()
+    const dispatch = useDispatch()
 
+  
+            const getPost = async (id) => {
+                try {
+                    const post = db.collection('posts').doc(id)
+                    const response = await post.get()
+                    if(response.exists){    
+                            dispatch(getPostActive(response.data()))
+                            history.push(`/adoption/${id}`)
+                           
+                    }    
+                    dispatch(endLoading())
+                } catch (error) {
+                    console.log(error.message) 
+                }
+            }
+         
+           
+          
     
-    const getActivePost = (id) => {
-        history.push(`/adoption/${id}`)
-    }
+  
     return (
         <div className={classes.post_container}>
         <img src={post.pic} width="250" height="200" alt="" className={classes.pic}/>
             <Typography variant="h4" className={classes.animalName}>{post.animalName}</Typography>
-            <BackButton type="button" className={classes.btnAnimal} onClick={() => getActivePost(post.id)}>Ver</BackButton>
+            <BackButton type="button" className={classes.btnAnimal} onClick={() => getPost(post.id)}>Ver</BackButton>
         </div>
     )
 }

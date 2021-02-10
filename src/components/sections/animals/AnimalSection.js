@@ -122,20 +122,20 @@ export const AnimalSection = () => {
     //Get posts 
     useEffect(() => {
       const getPosts = ()=> {
-        db.collection('posts').orderBy('date', 'desc').onSnapshot(postsSnapshot)
+        db
+        .collection('posts')
+        .orderBy('date', 'asc')
+        .onSnapshot((snapshot) => {
+            let posts = snapshot.docs.map(doc => {
+                return { id: doc.id, ...doc.data() }
+            })
+            dispatch(getPostsFromDb(posts))
+        })
       } 
       getPosts()
-    }, [])
+    }, [dispatch])
 
-    const postsSnapshot = (snapshot) => {
-        const post = snapshot.docs.map(doc => {
-            return{
-                id: doc.id,
-                ...doc.data()
-            }
-        })
-       dispatch(getPostsFromDb(post))
-    }
+   
 
     //Logout Function
     const startLogOutFn = () => {
